@@ -26,6 +26,22 @@
     --purple:   #a78bfa;
     --orange:   #fb923c;
   }
+  body.light-mode {
+    --bg:       #ffffff;
+    --bg2:      #f8f9fa;
+    --surface:  #ffffff;
+    --border:   #e2e8f0;
+    --dim:      #e2e8f0;
+    --text:     #1a202c;
+    --muted:    #718096;
+    --accent:   #3182ce;
+    --green:    #38a169;
+    --yellow:   #d69e2e;
+    --red:      #e53e3e;
+    --purple:   #805ad5;
+    --orange:   #dd6b20;
+    background: #ffffff !important;
+  }
 
   html, body { height: 100%; overflow: hidden; }
 
@@ -35,35 +51,18 @@
     color: var(--text);
     font-size: 14px;
     line-height: 1.6;
+    transition: background 0.3s ease, color 0.3s ease;
   }
 
   #root { height: 100vh; display: flex; align-items: center; justify-content: center; padding: 40px; }
 
-  /* ── Scrollbar ── */
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
   ::-webkit-scrollbar-thumb { background: var(--dim); border-radius: 3px; }
 
-  /* ── Cursor blink ── */
   @keyframes blink { 0%,49%{opacity:1} 50%,100%{opacity:0} }
   .cursor { display:inline-block; width:8px; height:1em; background:var(--accent); margin-left:2px; vertical-align:middle; animation:blink 1s step-end infinite; }
 
-  /* ── Glitch keyframes ── */
-  @keyframes glitch1 {
-    0%{clip-path:inset(20% 0 60% 0); transform:translate(-3px,0)}
-    50%{clip-path:inset(40% 0 40% 0); transform:translate(3px,0)}
-    100%{clip-path:inset(60% 0 20% 0); transform:translate(0,0)}
-  }
-  @keyframes glitch2 {
-    0%{clip-path:inset(60% 0 10% 0); transform:translate(3px,0)}
-    50%{clip-path:inset(10% 0 70% 0); transform:translate(-3px,0)}
-    100%{clip-path:inset(30% 0 50% 0); transform:translate(0,0)}
-  }
-  @keyframes scanline {
-    0%{top:0} 100%{top:100%}
-  }
-
-  /* ── Entry screen ── */
   .entry-screen {
     position:fixed; inset:0; background:var(--bg);
     display:flex; flex-direction:column; align-items:center; justify-content:center;
@@ -77,49 +76,34 @@
     line-height: 1.2;
     white-space: pre;
     text-align: center;
-    text-shadow: 0 0 20px rgba(56,189,248,.5);
     margin-bottom: 32px;
+    text-shadow: 0 0 20px rgba(56,189,248,.5);
   }
 
   .entry-box {
-    width: min(600px, 90vw);
     border: 1px solid var(--border);
-    background: var(--surface);
-    border-radius: 4px;
+    border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 0 60px rgba(56,189,248,.08), 0 20px 60px rgba(0,0,0,.6);
+    background: var(--bg2);
+    box-shadow: 0 20px 60px rgba(0,0,0,.5);
+    width: fit-content;
   }
   .entry-titlebar {
     background: var(--bg2);
-    padding: 8px 14px;
+    border-bottom: 1px solid var(--border);
+    padding: 0 16px;
     display: flex;
     align-items: center;
-    gap: 8px;
-    border-bottom: 1px solid var(--border);
+    gap: 12px;
+    height: 40px;
   }
-  .dot { width:12px; height:12px; border-radius:50%; }
   .dot-r{background:#f87171;} .dot-y{background:#facc15;} .dot-g{background:#4ade80;}
   .titlebar-label { flex:1; text-align:center; color:var(--muted); font-size:12px; }
 
-  .entry-body { padding: 20px 24px 24px; }
+  .entry-body { padding: 2px 24px; text-align: left; }
   .entry-prompt-line { display:flex; align-items:center; gap:8px; margin-top:12px; }
-  .prompt-sym { color: var(--green); }
-  .entry-input {
-    flex:1; background:transparent; border:none; outline:none;
-    color:var(--text); font-family:inherit; font-size:14px; caret-color: var(--accent);
-  }
-  .entry-hint { color:var(--muted); font-size:12px; margin-bottom:4px; }
+  .prompt-sym { color:var(--green); }
 
-  .scanline-overlay {
-    position:fixed; inset:0; pointer-events:none; z-index:9999;
-    background: repeating-linear-gradient(
-      to bottom,
-      transparent 0px, transparent 3px,
-      rgba(0,0,0,.06) 3px, rgba(0,0,0,.06) 4px
-    );
-  }
-
-  /* ── Main terminal ── */
   .terminal-card {
     width: 100%;
     max-width: 900px;
@@ -131,12 +115,6 @@
     flex-direction: column;
     box-shadow: 0 20px 60px rgba(0,0,0,.5);
   }
-  .terminal-wrapper {
-    flex:1; display:flex; flex-direction:column;
-    overflow:hidden;
-    opacity:0; transition:opacity .5s ease .1s;
-  }
-  .terminal-wrapper.visible { opacity:1; }
 
   /* Top bar */
   .top-bar {
@@ -218,16 +196,8 @@
   .prog-pct { width:36px; text-align:right; color:var(--muted); font-size:12px; }
 
   /* Project card */
-  .project-card {
-    border: 1px solid var(--border);
-    border-radius:4px;
-    padding:14px 18px;
-    margin: 6px 0;
-    background:var(--surface);
-    transition: border-color .2s;
-  }
-  .project-card:hover { border-color: var(--accent); }
-  .project-name { color:var(--accent); font-weight:700; font-size:15px; }
+  .project-card { border:1px solid var(--border); border-radius:6px; padding:16px; margin:4px 0; background:var(--bg2); }
+  .project-name { color:var(--text); font-size:15px; font-weight:600; margin-bottom:6px; }
   .project-desc { color:var(--text); margin:4px 0; font-size:13px; }
   .project-tags { display:flex; flex-wrap:wrap; gap:6px; margin:6px 0; }
   .project-link { color:var(--muted); font-size:12px; }
@@ -238,21 +208,22 @@
   @keyframes fadeInLine { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:none} }
   .anim-line { animation: fadeInLine .2s ease forwards; }
 
-  /* Glitch text */
-  .glitch-wrap { position:relative; display:inline-block; }
-  .glitch-wrap::before,
-  .glitch-wrap::after {
-    content: attr(data-text);
-    position:absolute; inset:0;
-    color:var(--accent);
-  }
-  .glitch-wrap::before { animation: glitch1 .4s infinite; color:var(--red); opacity:.6; }
-  .glitch-wrap::after  { animation: glitch2 .4s infinite; color:var(--green); opacity:.6; }
-
   /* Help table */
   .help-row { display:grid; grid-template-columns:140px 1fr; gap:4px; padding:2px 0; }
   .help-cmd { color:var(--yellow); }
   .help-desc { color:var(--muted); }
+
+  /* Theme toggle */
+  .theme-toggle {
+    cursor: pointer;
+    color: var(--muted);
+    font-size: 20px;
+    transition: all 0.3s;
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+  }
+  .theme-toggle:hover { color: var(--accent); transform: scale(1.1); }
 
   /* Responsive */
   @media(max-width:600px){
@@ -269,26 +240,30 @@
 <script type="text/babel">
 const { useState, useEffect, useRef, useCallback } = React;
 
-/* ─── ASCII Banner ─────────────────────────────────────────── */
+/* ─── ASCII Banner ─────────────────────────────────── */
 const BANNER = `
  ███╗   ███╗ ██████╗ ██╗  ██╗ █████╗ ███╗   ███╗███╗   ███╗ █████╗ ██████╗ 
  ████╗ ████║██╔═══██╗██║  ██║██╔══██╗████╗ ████║████╗ ████║██╔══██╗██╔══██╗
  ██╔████╔██║██║   ██║███████║███████║██╔████╔██║██╔████╔██║███████║██║  ██║
  ██║╚██╔╝██║██║   ██║██╔══██║██╔══██║██║╚██╔╝██║██║╚██╔╝██║██╔══██║██║  ██║
  ██║ ╚═╝ ██║╚██████╔╝██║  ██║██║  ██║██║ ╚═╝ ██║██║ ╚═╝ ██║██║  ██║██████╔╝
- ╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝╚═════╝ 
-                   ██████╗  █████╗ ██╗    ██╗ ██████╗  ██████╗ ██████╗       
-                   ██╔══██╗██╔══██╗██║    ██║██╔═══██╗██╔═══██╗██╔══██╗      
-                   ██║  ██║███████║██║ █╗ ██║██║   ██║██║   ██║██║  ██║      
-                   ██║  ██║██╔══██║██║███╗██║██║   ██║██║   ██║██║  ██║      
-                   ██████╔╝██║  ██║╚███╔███╔╝╚██████╔╝╚██████╔╝██████╔╝      
-                   ╚═════╝ ╚═╝  ╚═╝ ╚══╝╚══╝  ╚═════╝  ╚═════╝ ╚═════╝      
+ ╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝     ╚═╝╚═╝  ╚═════╝ 
+        ██████╗  █████╗ ██╗    ██╗ ██████╗  ██████╗ ██████╗       
+        ██╔══██╗██╔══██╗██║    ██║██╔═══██╗██╔═══██╗██╔══██╗      
+        ██║  ██║███████║██║ █╗ ██║██║   ██║██║   ██║██║  ██║      
+        ██║  ██║██╔══██║██║███╗██║██║   ██║██║   ██║██║  ██║      
+        ██████╔╝██║  ██║╚███╔███╔╝╚██████╔╝╚██████╔╝██████╔╝      
+        ╚═════╝ ╚═╝  ╚═╝ ╚══╝╚══╝  ╚═════╝  ╚═════╝ ╚═════╝      
 `.trim();
 
-/* ─── Data ──────────────────────────────────────────────────── */
-const SKILLS = [];
+/* ─── Data ─────────────────────────────────────────── */
+const SKILLS = [
+  // { name:'', pct:0, color:'' },
+];
 
-const PROJECTS = [];
+const PROJECTS = [
+  // { id:'', name:'', desc:'', tags:[''], link:'', path:'' },
+];
 
 /* ─── Output line helpers ───────────────────────────────────── */
 let _key = 0;
@@ -304,7 +279,7 @@ const succ  = c => L('success', c);
 const info  = c => L('info', c);
 const warn  = c => L('warn', c);
 
-/* ─── JSX helpers ───────────────────────────────────────────── */
+/* ─── JSX helpers ───────────────────────────────────── */
 const Cx = ({c,cl}) => <span className={cl}>{c}</span>;
 const cyan   = s => <span className="hl-cyan">{s}</span>;
 const green  = s => <span className="hl-green">{s}</span>;
@@ -315,7 +290,7 @@ const muted  = s => <span className="hl-muted">{s}</span>;
 const bold   = s => <span className="hl-bold">{s}</span>;
 const Badge  = ({c,color='blue'}) => <span className={`badge badge-${color}`}>{c}</span>;
 
-/* ─── ProgressBar ───────────────────────────────────────────── */
+/* ─── ProgressBar ───────────────────────────────────── */
 function ProgBar({name, pct, color, delay}) {
   const [w, setW] = useState(0);
   useEffect(()=>{ const t=setTimeout(()=>setW(pct), delay||0); return()=>clearTimeout(t); },[]);
@@ -330,7 +305,7 @@ function ProgBar({name, pct, color, delay}) {
   );
 }
 
-/* ─── Output renderer ───────────────────────────────────────── */
+/* ─── Output renderer ─────────────────────────────────────────── */
 function OutLine({line}) {
   if(line.type==='blank') return <div className="line blank"/>;
   if(typeof line.content === 'string') {
@@ -360,17 +335,10 @@ function buildHelp() {
 function buildWhoami() {
   return [
     blank(),
-    L('comment','# ── Developer Profile ─────────────────────────────────'),
+    L('comment','# ── Developer Profile ─────────────────────────'),
     blank(),
-    L('out',<>{muted('$')} {cyan('name')}        {muted(':')} {bold('MohammadDawood')}</>),
-    L('out',<>{muted('$')} {cyan('role')}        {muted(':')} {green('Frontend Developer')} {muted('/')} {purple('Full Stack Developer')}</>),
-    L('out',<>{muted('$')} {cyan('status')}      {muted(':')} Building smart systems {yellow('⚡')}</>),
-    L('out',<>{muted('$')} {cyan('location')}    {muted(':')} {orange('🌍')} Remote / Global</>),
-    L('out',<>{muted('$')} {cyan('experience')}  {muted(':')} {yellow('3+')} years of crafting web systems</>),
-    L('out',<>{muted('$')} {cyan('focus')}       {muted(':')} React, Node.js, IoT, Clean Architecture</>),
-    L('out',<>{muted('$')} {cyan('available')}   {muted(':')} <Badge c="Open to Work" color="green"/></>),
-    blank(),
-    L('comment','# ─────────────────────────────────────────────────────'),
+    // Add your info here:
+    // L('out',<>{muted('$')} {cyan('name')} {muted(':')} {bold('Your Name')}</>),
     blank(),
   ];
 }
@@ -386,20 +354,13 @@ function buildSkills(mode) {
         <Badge c="Node.js" color="green"/> {'  '}
         <Badge c="JavaScript" color="orange"/> {'  '}
         <Badge c="TypeScript" color="purple"/> {'  '}
-        <Badge c="CSS/Tailwind" color="blue"/>
-      </>),
-      L('out',<>
-        <Badge c="IoT" color="green"/> {'  '}
-        <Badge c="REST APIs" color="orange"/> {'  '}
-        <Badge c="GraphQL" color="purple"/> {'  '}
-        <Badge c="Problem Solving" color="green"/>
       </>),
       blank(),
     ];
   }
   return [
     blank(),
-    L('comment','# ── Skills & Proficiency ──────────────────────────────'),
+    L('comment','# ── Skills & Proficiency ──────────────────────'),
     blank(),
     ...SKILLS.map((s,i)=>L('out',<ProgBar key={s.name} name={s.name} pct={s.pct} color={s.color} delay={i*80}/>)),
     blank(),
@@ -411,14 +372,14 @@ function buildSkills(mode) {
 function buildProjects() {
   return [
     blank(),
-    L('comment','# ── Projects ──────────────────────────────────────────'),
+    L('comment','# ── Projects ──────────────────────────────────'),
     blank(),
     L('out',<>{muted('Found')} {yellow(PROJECTS.length)} {muted('projects ↓')}</>),
     blank(),
-    ...PROJECTS.map(p => L('out',
-      <div className="project-card">
+    ...PROJECTS.map(p => L('out',<>
+      <div className="project-card" style={{borderColor:'var(--accent)'}}>
         <div className="project-name">{p.id}/</div>
-        <div className="project-name" style={{fontSize:'16px',marginTop:2}}>{p.name}</div>
+        <div className="project-name" style={{fontSize:'16px'}}>{p.name}</div>
         <div className="project-desc">{p.desc}</div>
         <div className="project-tags">
           {p.tags.map(t=><Badge key={t} c={t} color="blue"/>)}
@@ -426,7 +387,7 @@ function buildProjects() {
         <div className="project-link">📂 path: {muted(p.path)}</div>
         <div className="project-link">🔗 repo: <a href={p.link} target="_blank" rel="noopener noreferrer">{p.link}</a></div>
       </div>
-    )),
+    </>)),
     blank(),
     L('comment','# ─────────────────────────────────────────────────────'),
     blank(),
@@ -442,11 +403,11 @@ function buildOpen(id) {
     blank(),
     L('out',<div className="project-card" style={{borderColor:'var(--accent)'}}>
       <div className="project-name" style={{fontSize:'17px'}}>{p.name}</div>
-      <div className="project-desc" style={{marginTop:6}}>{p.desc}</div>
+      <div className="project-desc" style={{marginTop:'6px'}}>{p.desc}</div>
       <div className="project-tags" style={{margin:'8px 0'}}>
         {p.tags.map(t=><Badge key={t} c={t} color="blue"/>)}
       </div>
-      <div className="project-link" style={{marginTop:4}}>📂 {muted(p.path)}</div>
+      <div className="project-link" style={{marginTop:'4px'}}>📂 {muted(p.path)}</div>
       <div className="project-link">🔗 <a href={p.link} target="_blank" rel="noopener noreferrer">{p.link}</a></div>
     </div>),
     blank(),
@@ -458,14 +419,9 @@ function buildOpen(id) {
 function buildContact() {
   return [
     blank(),
-    L('comment','# ── Contact ───────────────────────────────────────────'),
+    L('comment','# ── Contact ──────────────────────────────────'),
     blank(),
-    L('out',<>{muted('📧')} email    {muted(':')} {cyan('mohammaddawood.dev@gmail.com')}</>),
-    L('out',<>{muted('🐙')} github   {muted(':')} <a href="https://github.com/MohammadDawood" target="_blank" rel="noopener noreferrer" style={{color:'var(--green)'}}>github.com/MohammadDawood</a></>),
-    L('out',<>{muted('💼')} linkedin {muted(':')} <a href="https://linkedin.com/in/mohammaddawood" target="_blank" rel="noopener noreferrer" style={{color:'var(--accent)'}}>linkedin.com/in/mohammaddawood</a></>),
-    L('out',<>{muted('🌐')} website  {muted(':')} {purple('mohammaddawood.dev')}</>),
-    blank(),
-    L('comment','# ─────────────────────────────────────────────────────'),
+    L('out',<>{muted('📧')} email    {muted(':')} {cyan('chanchesmoker@gmail.com')}</>),
     blank(),
   ];
 }
@@ -495,6 +451,12 @@ function Terminal() {
   const [input, setInput] = useState('');
   const [history, setHistory] = useState([]);
   const [histIdx, setHistIdx] = useState(-1);
+  const [isLight, setIsLight] = useState(false);
+
+  useEffect(()=>{
+    document.body.className = isLight ? 'light-mode' : '';
+  },[isLight]);
+
   const endRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -591,6 +553,9 @@ function Terminal() {
         </div>
         <div className="top-bar-title">MohammadDawood@portfolio ~ zsh</div>
         <div className="top-bar-status">● connected</div>
+        <div className="theme-toggle" onClick={(e)=>{e.stopPropagation(); setIsLight(!isLight);}}>
+          {isLight ? '◑' : '◐'}
+        </div>
       </div>
 
       {/* Output */}
@@ -628,35 +593,29 @@ function Terminal() {
 
 /* ─── Entry screen ──────────────────────────────────────────── */
 function EntryScreen({onEnter}) {
-  const [input, setInput]       = useState('');
   const [fading, setFading]     = useState(false);
-  const [errMsg, setErrMsg]     = useState('');
   const [typed, setTyped]       = useState('');
-  const inputRef = useRef(null);
 
-  const INTRO = 'Type  yes  to initialize session...';
+  const INTRO = 'npm install mohammaddawood';
   useEffect(()=>{
     let i=0;
     const t=setInterval(()=>{
-      if(i<=INTRO.length){ setTyped(INTRO.slice(0,i)); i++; }
-      else clearInterval(t);
-    },35);
+      if(i<=INTRO.length){
+        setTyped(INTRO.slice(0,i));
+        i++;
+      } else {
+        clearInterval(t);
+        setTimeout(()=>{
+          setFading(true);
+          setTimeout(onEnter,650);
+        },500);
+      }
+    },100);
     return ()=>clearInterval(t);
   },[]);
 
-  const submit = () => {
-    if(input.trim().toLowerCase()==='yes'){
-      setFading(true);
-      setTimeout(onEnter,650);
-    } else {
-      setErrMsg(`zsh: command not found: ${input.trim()||'(empty)'}`);
-      setInput('');
-      setTimeout(()=>setErrMsg(''),2500);
-    }
-  };
-
   return (
-    <div className={`entry-screen${fading?' fade-out':''}`} onClick={()=>inputRef.current?.focus()}>
+    <div className={`entry-screen${fading?' fade-out':''}`}>
       <div className="ascii-banner">{BANNER}</div>
       <div className="entry-box">
         <div className="entry-titlebar">
@@ -664,22 +623,8 @@ function EntryScreen({onEnter}) {
           <div className="titlebar-label">terminal — zsh — 80×24</div>
         </div>
         <div className="entry-body">
-          <div className="entry-hint">{typed}<span className="cursor"/></div>
-          {errMsg && <div style={{color:'var(--red)',fontSize:'13px',marginBottom:4}}>{errMsg}</div>}
-          <div className="entry-prompt-line">
-            <span className="prompt-sym">❯</span>
-            <input
-              ref={inputRef}
-              className="entry-input"
-              value={input}
-              onChange={e=>setInput(e.target.value)}
-              onKeyDown={e=>e.key==='Enter'&&submit()}
-              autoFocus
-              spellCheck={false}
-              autoComplete="off"
-              placeholder=""
-            />
-            {!input && <span className="cursor"/>}
+          <div style={{color:'var(--green)',fontSize:'14px',marginBottom:'12px',fontFamily:'inherit'}}>
+            {typed}<span className="cursor"/>
           </div>
         </div>
       </div>
@@ -687,7 +632,7 @@ function EntryScreen({onEnter}) {
   );
 }
 
-/* ─── App ───────────────────────────────────────────────────── */
+/* ─── App ───────────────────────────────────────────── */
 function App() {
   const [entered, setEntered] = useState(false);
   if (!entered) return <EntryScreen onEnter={()=>setEntered(true)}/>;
