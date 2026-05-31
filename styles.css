@@ -461,11 +461,6 @@ footer { text-align: center; padding: 56px 24px 40px; border-top: 1px solid var(
   .meta-divider { display: none; }
   #back-to-top { bottom: 14px; left: 14px; width: 42px; height: 42px; }
   .nav-arrow { display: none; }
-  .projects-swiper { overflow: hidden !important; padding: 10px 0 20px; }
-  .projects-swiper .swiper-wrapper { flex-direction: column !important; transform: none !important; gap: 22px; }
-  .projects-swiper .swiper-slide { width: 100% !important; max-width: 400px; height: auto !important; margin: 0 auto !important; filter: none !important; opacity: 1 !important; transform: none !important; }
-  .projects-swiper .swiper-pagination { display: none; }
-  .project-card { height: auto; }
 }
 @media (max-width: 560px) {
   .bento { grid-template-columns: 1fr; grid-auto-rows: auto; }
