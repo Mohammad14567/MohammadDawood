@@ -1,1 +1,297 @@
 
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mobile applications designed and built by Mohammad Dawood.">
+  <meta name="theme-color" content="#c0622b">
+  <title>Mobile Apps — Mohammad Dawood</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Pixelify+Sans:wght@400;500;600;700&family=Sora:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* ===========================================================
+       MOBILE APPS — showcase page (matches site palette)
+       =========================================================== */
+    body.apps-page { background: var(--cream); color: var(--text); overflow-x: hidden; min-height: 100vh; }
+
+    /* ambient background, same warm energy as the main site */
+    .apps-bg { position: fixed; inset: 0; z-index: -3; overflow: hidden; pointer-events: none; }
+    .apps-bg .blob { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.30; }
+    .apps-bg .b1 { width: 46vw; height: 46vw; background: radial-gradient(circle, #e8b87a, transparent 70%); top: -12%; left: -8%; animation: drift1 24s ease-in-out infinite; }
+    .apps-bg .b2 { width: 42vw; height: 42vw; background: radial-gradient(circle, #c0622b, transparent 70%); bottom: -14%; right: -10%; animation: drift2 28s ease-in-out infinite; }
+    @keyframes drift1 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(7vw,5vh) scale(1.12)} }
+    @keyframes drift2 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-6vw,-7vh) scale(1.1)} }
+    .apps-grid-bg { position: fixed; inset: 0; z-index: -2; pointer-events: none; opacity: 0.4;
+      background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 60px 60px; -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 80%); mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 80%); }
+
+    /* back button */
+    .back { position: fixed; top: 22px; left: 22px; z-index: 80; display: inline-flex; align-items: center; gap: 9px;
+      background: var(--card); border: 1px solid var(--card-border); color: var(--text-soft);
+      padding: 11px 20px 11px 16px; border-radius: 50px; font-family: 'Nunito', sans-serif; font-size: 0.88rem; font-weight: 800;
+      text-decoration: none; cursor: pointer; box-shadow: var(--shadow-sm); transition: transform .3s var(--ease), background .3s, color .3s, box-shadow .3s; }
+    .back:hover { transform: translateX(-4px); color: var(--orange); border-color: var(--orange); box-shadow: var(--shadow); }
+
+    /* header */
+    .apps-head { text-align: center; padding: 110px 24px 0; max-width: 720px; margin: 0 auto; }
+    .apps-eyebrow { display: inline-block; font-family: 'Pixelify Sans', cursive; font-size: 0.9rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--orange); margin-bottom: 16px; padding: 6px 16px;
+      border: 1px solid var(--card-border); border-radius: 50px; background: var(--card); }
+    .apps-title { font-family: 'Sora', sans-serif; font-size: clamp(2.4rem, 6vw, 4rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.03em; }
+    .apps-title .grad { background: var(--grad-text); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .apps-sub { margin: 20px auto 0; max-width: 560px; color: var(--text-soft); font-size: 1.1rem; line-height: 1.7; }
+
+    /* ===== showcase ===== */
+    .showcase { max-width: 1060px; margin: 50px auto 0; padding: 10px 16px; position: relative; }
+    .stage { display: flex; align-items: center; justify-content: center; gap: clamp(10px, 4vw, 56px); min-height: 600px; position: relative; }
+
+    /* app list beside the phone (desktop) */
+    .app-list { flex: 0 0 auto; width: min(380px, 40vw); display: none; flex-direction: column; gap: 12px; }
+    .app-list-item { display: flex; align-items: center; gap: 14px; padding: 14px 16px; width: 100%; text-align: left; cursor: pointer;
+      background: var(--card); border: 1px solid var(--card-border); border-radius: var(--radius); font-family: 'Nunito', sans-serif;
+      position: relative; overflow: hidden; transition: transform .3s var(--ease), border-color .3s, box-shadow .3s; }
+    .app-list-item:hover { transform: translateX(5px); box-shadow: var(--shadow-sm); }
+    .app-list-item.active { border-color: color-mix(in srgb, var(--ac) 55%, transparent); box-shadow: var(--shadow); }
+    .app-list-item.active::before { content: ''; position: absolute; left: 0; top: 12px; bottom: 12px; width: 4px; border-radius: 0 4px 4px 0; background: var(--ac); }
+    .ali-icon { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem;
+      background: color-mix(in srgb, var(--ac) 16%, transparent); flex: none; }
+    .ali-body { flex: 1; display: flex; flex-direction: column; }
+    .ali-name { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.05rem; color: var(--text); }
+    .ali-role { font-size: 0.82rem; color: var(--text-muted); font-weight: 600; }
+    .ali-status { font-size: 0.66rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; padding: 5px 11px; border-radius: 50px; flex: none; }
+    .ali-status.live { background: color-mix(in srgb, #22c55e 16%, transparent); color: #4ade80; }
+    .ali-status.soon { background: var(--surface-2); color: var(--text-muted); }
+    @media (min-width: 940px) { .app-list { display: flex; } .dots { display: none; } }
+
+    /* the big phone */
+    .phone-wrap { flex: 0 0 auto; position: relative; }
+    .phone-glow { position: absolute; inset: -34px; z-index: -1; background: var(--orange); filter: blur(70px); opacity: 0.35; transition: background .5s var(--ease); }
+    .phone { position: relative; width: 320px; height: 640px; border-radius: 46px; background: linear-gradient(160deg, #2a2014, #181109);
+      padding: 14px; box-shadow: 0 0 0 2px var(--card-border), var(--shadow-lg); }
+    .phone::before { content: ''; position: absolute; top: 22px; left: 50%; transform: translateX(-50%); width: 120px; height: 26px;
+      background: #0d0a06; border-radius: 0 0 16px 16px; z-index: 3; }
+    .phone::after { content: ''; position: absolute; right: -3px; top: 150px; width: 3px; height: 56px; background: var(--card-border); border-radius: 4px; }
+
+    .screen { position: relative; width: 100%; height: 100%; border-radius: 34px; overflow: hidden; background: #0a0704; box-shadow: inset 0 0 0 2px rgba(0,0,0,0.5); cursor: grab; isolation: isolate; transform: translateZ(0); -webkit-mask-image: -webkit-radial-gradient(#fff, #000); mask-image: radial-gradient(#fff, #000); }
+    .screen:active { cursor: grabbing; }
+    .screen-track { display: flex; height: 100%; width: 100%; transition: transform .55s var(--ease); will-change: transform; }
+    .app-screen { flex: 0 0 100%; width: 100%; height: 100%; position: relative; display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden; padding: 24px; }
+    .app-screen .glaze { position: absolute; inset: 0; background: linear-gradient(160deg, color-mix(in srgb, var(--sc) 85%, #000 10%), color-mix(in srgb, var(--sc) 45%, #000 35%)); }
+    .app-screen .dots-bg { position: absolute; inset: 0; background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.10) 1px, transparent 0); background-size: 16px 16px; opacity: 0.5; }
+    .as-name { position: relative; z-index: 1; font-family: 'Pixelify Sans', cursive; font-weight: 700;
+      font-size: clamp(1.7rem, 7vw, 2.4rem); line-height: 1.25; color: #fff;
+      text-shadow: 3px 3px 0 rgba(0,0,0,0.35); letter-spacing: 0.02em; image-rendering: pixelated;
+      padding: 0 10px; word-break: break-word; }
+    @keyframes floaty { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-9px)} }
+
+    /* controls */
+    .controls { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 40px; }
+    .arrow { width: 56px; height: 56px; border-radius: 50%; border: 1px solid var(--card-border); background: var(--card); color: var(--orange);
+      font-size: 1.1rem; cursor: pointer; box-shadow: var(--shadow); display: flex; align-items: center; justify-content: center;
+      transition: transform .3s var(--ease-spring), background .3s, color .3s; }
+    .arrow:hover { background: var(--orange); color: #fff; transform: scale(1.1); }
+    .arrow:active { transform: scale(0.94); }
+    .counter { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1rem; color: var(--text-soft); min-width: 90px; text-align: center; font-variant-numeric: tabular-nums; }
+    .counter b { color: var(--orange); }
+
+    /* dots */
+    .dots { display: flex; justify-content: center; gap: 10px; margin-top: 26px; flex-wrap: wrap; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--card-border); cursor: pointer; transition: width .3s var(--ease), background .3s; }
+    .dot.active { width: 30px; border-radius: 6px; background: var(--orange); }
+
+    /* detail card */
+    .detail { max-width: 660px; margin: 50px auto 0; padding: clamp(26px, 4vw, 40px); position: relative; overflow: hidden;
+      background: var(--card); border: 1px solid var(--card-border); border-radius: var(--radius-lg); box-shadow: var(--shadow); }
+    .detail-glow { position: absolute; top: -70px; left: 50%; transform: translateX(-50%); width: 260px; height: 260px; filter: blur(80px); opacity: 0.18; transition: background .5s; pointer-events: none; }
+    .detail-top { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; position: relative; }
+    .detail-icon { width: 58px; height: 58px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 2rem; flex: none; transition: background .4s; }
+    .detail-top h3 { font-family: 'Sora', sans-serif; font-size: 1.5rem; font-weight: 800; line-height: 1.1; }
+    .detail-role { color: var(--orange); font-weight: 800; font-size: 0.92rem; }
+    .detail p { color: var(--text-soft); line-height: 1.75; font-size: 1.02rem; margin-bottom: 20px; position: relative; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; position: relative; }
+    .tag { font-size: 0.78rem; font-weight: 700; padding: 6px 14px; border-radius: 50px; background: var(--surface-2); color: var(--text-soft); border: 1px solid var(--card-border); }
+    .detail-links { display: flex; gap: 12px; flex-wrap: wrap; position: relative; }
+    .d-btn { padding: 12px 24px; border-radius: 50px; font-weight: 800; font-size: 0.9rem; text-decoration: none; cursor: pointer;
+      background: var(--grad-warm); color: #fff; box-shadow: var(--shadow-glow); border: none; transition: transform .3s var(--ease), box-shadow .3s; }
+    .d-btn.ghost-btn { background: transparent; color: var(--text-soft); border: 1.5px solid var(--card-border); box-shadow: none; }
+    .d-btn:hover { transform: translateY(-2px); }
+    .d-btn.ghost-btn:hover { border-color: var(--orange); color: var(--orange); }
+    .d-soon { display: inline-flex; align-items: center; gap: 9px; padding: 12px 22px; border-radius: 50px; font-weight: 800; font-size: 0.88rem;
+      background: var(--surface-2); border: 1px dashed var(--card-border); color: var(--text-muted); }
+    .d-soon .pdot { width: 9px; height: 9px; border-radius: 50%; background: var(--orange); animation: pdotBlink 1.4s ease-in-out infinite; }
+    @keyframes pdotBlink { 0%,100%{opacity:.3} 50%{opacity:1} }
+
+    /* footer + owl */
+    .apps-footer { text-align: center; padding: 70px 24px 80px; color: var(--text-muted); font-size: 0.9rem; }
+    .apps-footer a { color: var(--orange); text-decoration: none; font-weight: 700; }
+    .apps-footer a:hover { text-decoration: underline; }
+    .owl { position: fixed; bottom: 18px; right: 18px; width: 78px; height: 78px; image-rendering: pixelated; z-index: 70; cursor: pointer;
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,0.4)); animation: floaty 3s ease-in-out infinite; }
+    .owl-bubble { position: fixed; bottom: 102px; right: 18px; z-index: 71; background: var(--card); color: var(--text);
+      border: 2px solid var(--tan); border-radius: 16px; font-family: 'Pixelify Sans', cursive; font-size: 0.95rem; padding: 10px 14px;
+      box-shadow: var(--shadow); opacity: 0; transform: scale(0.8) translateY(8px); transition: .3s var(--ease-spring); pointer-events: none; }
+    .owl-bubble.show { opacity: 1; transform: scale(1) translateY(0); }
+
+    @media (max-width: 939px) {
+      .stage { flex-direction: column; min-height: 0; }
+      .showcase.single .app-list { display: flex; width: 100%; max-width: 360px; margin: 8px auto 0; }
+    }
+    @media (max-width: 600px) {
+      .phone { width: min(280px, 80vw); height: auto; aspect-ratio: 1 / 2; }
+      .stage { min-height: 0; gap: 24px; }
+      .apps-head { padding-top: 90px; }
+      .apps-sub { font-size: 1rem; }
+      .owl { width: 58px; height: 58px; }
+    }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } .screen-track { transition: none; } }
+  </style>
+</head>
+<body class="apps-page">
+
+  <div class="apps-bg"><span class="blob b1"></span><span class="blob b2"></span></div>
+  <div class="apps-grid-bg"></div>
+
+  <a href="index.html" class="back">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Back to portfolio
+  </a>
+
+  <header class="apps-head">
+    <span class="apps-eyebrow">Mobile Apps</span>
+    <h1 class="apps-title">Apps I've <span class="grad">designed &amp; built</span></h1>
+    <p class="apps-sub">Native and cross-platform mobile applications, from first concept to the App Store.</p>
+  </header>
+
+  <section class="showcase single">
+    <div class="stage">
+
+      <div class="phone-wrap">
+        <div class="phone-glow" id="phone-glow"></div>
+        <div class="phone">
+          <div class="screen" id="screen">
+            <div class="screen-track" id="track"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="app-list" id="app-list"></div>
+
+    </div>
+
+    <div class="detail" id="detail">
+      <div class="detail-glow" id="detail-glow"></div>
+      <div class="detail-top">
+        <div class="detail-icon" id="d-icon"></div>
+        <div><h3 id="d-name"></h3><div class="detail-role" id="d-role"></div></div>
+      </div>
+      <p id="d-desc"></p>
+      <div class="tags" id="d-tags"></div>
+      <div class="detail-links" id="d-links"></div>
+    </div>
+  </section>
+
+  <footer class="apps-footer">
+    <p>&copy; 2026 Mohammad Dawood &middot; <a href="index.html">Back to the portfolio</a></p>
+  </footer>
+
+  <div class="owl-bubble" id="owl-bubble"></div>
+  <img class="owl" id="owl" src="Frame 3.png" alt="Owl mascot">
+
+  <script>
+    const APPS = [
+      {
+        icon:'\uD83C\uDF54', name:'Super Burger', role:'Food ordering app',
+        tagline:'Build it. Stack it. Order it.', accent:'#e8662b', status:'live',
+        desc:'A bold burger-ordering experience for mobile. Interactive menus, a build-your-burger flow, live order tracking, saved favorites, and loyalty rewards.',
+        tags:['React Native','Expo','Firebase','Stripe'],
+        dock:['\uD83C\uDF54','\uD83C\uDF5F','\uD83E\uDD64','\u2B50'],
+        links:[{label:'View case study',href:'#'},{label:'Source',href:'#',ghost:true}]
+      }
+    ];
+
+    let i = 0;
+    const track = document.getElementById('track');
+    const listEl = document.getElementById('app-list');
+    const glow = document.getElementById('phone-glow');
+    const single = APPS.length === 1;
+
+    track.innerHTML = APPS.map(a => `
+      <div class="app-screen" style="--sc:${a.accent}">
+        <div class="glaze"></div>
+        <div class="dots-bg"></div>
+        <div class="as-name">${a.name}</div>
+      </div>`).join('');
+
+    listEl.innerHTML = APPS.map((a,n)=>`
+      <button class="app-list-item" data-i="${n}" style="--ac:${a.accent}">
+        <span class="ali-icon">${a.icon}</span>
+        <span class="ali-body"><span class="ali-name">${a.name}</span><span class="ali-role">${a.role}</span></span>
+        <span class="ali-status ${a.status==='live'?'live':'soon'}">${a.status==='live'?'Live':'Soon'}</span>
+      </button>`).join('');
+    const listItems = [...listEl.children];
+    listItems.forEach(it=>it.addEventListener('click', ()=>{ go(+it.dataset.i); bump(); }));
+
+    const dIcon=document.getElementById('d-icon'), dName=document.getElementById('d-name'),
+          dRole=document.getElementById('d-role'), dDesc=document.getElementById('d-desc'),
+          dTags=document.getElementById('d-tags'), dLinks=document.getElementById('d-links'),
+          dGlow=document.getElementById('detail-glow');
+
+    function render(){
+      track.style.transform = `translateX(${-i*100}%)`;
+      listItems.forEach((it,n)=>it.classList.toggle('active', n===i));
+      const a = APPS[i];
+      glow.style.background = a.accent;
+      dGlow.style.background = a.accent;
+      dIcon.textContent = a.icon;
+      dIcon.style.background = `color-mix(in srgb, ${a.accent} 18%, transparent)`;
+      dName.textContent = a.name;
+      dRole.textContent = a.role;
+      dDesc.textContent = a.desc;
+      dTags.innerHTML = a.tags.map(t=>`<span class="tag">${t}</span>`).join('');
+      dLinks.innerHTML = a.status==='live'
+        ? a.links.map(l=>`<a class="d-btn ${l.ghost?'ghost-btn':''}" href="${l.href}" target="_blank" rel="noopener">${l.label}</a>`).join('')
+        : `<span class="d-soon"><span class="pdot"></span> Coming soon</span>`;
+    }
+
+    function go(n){ i = (n+APPS.length)%APPS.length; render(); }
+    const next = ()=>go(i+1), prev = ()=>go(i-1);
+
+    let timer = null;
+    function bump(){ if(single) return; clearInterval(timer); timer=setInterval(next,4500); }
+
+    if(!single){
+      addEventListener('keydown', e=>{ if(e.key==='ArrowRight'){next();bump();} if(e.key==='ArrowLeft'){prev();bump();} });
+
+      // swipe / drag
+      const screen = document.getElementById('screen');
+      let sx=0, dragging=false;
+      const start = x=>{sx=x;dragging=true;};
+      const end = x=>{ if(!dragging)return; dragging=false; const dx=x-sx; if(dx<-40){next();bump();} else if(dx>40){prev();bump();} };
+      screen.addEventListener('touchstart',e=>start(e.touches[0].clientX),{passive:true});
+      screen.addEventListener('touchend',e=>end(e.changedTouches[0].clientX));
+      screen.addEventListener('mousedown',e=>{e.preventDefault();start(e.clientX);});
+      addEventListener('mouseup',e=>{ if(dragging) end(e.clientX); });
+
+      // autoplay
+      timer = setInterval(next, 4500);
+      const stage = document.querySelector('.stage');
+      stage.addEventListener('mouseenter', ()=>clearInterval(timer));
+      stage.addEventListener('mouseleave', ()=>{ clearInterval(timer); timer=setInterval(next,4500); });
+    }
+
+    render();
+
+    // owl
+    const owl=document.getElementById('owl'), bubble=document.getElementById('owl-bubble');
+    const lines=['Hoot! Take a look around.','Tap the card for details.','More apps on the way!','Like what you see?','Built with care by Mo.'];
+    let bt;
+    function say(t){ bubble.textContent=t; bubble.classList.add('show'); clearTimeout(bt); bt=setTimeout(()=>bubble.classList.remove('show'),2400); }
+    owl.addEventListener('click', ()=>{ say(lines[Math.floor(Math.random()*lines.length)]); owl.style.transform='scale(1.18) rotate(-8deg)'; setTimeout(()=>owl.style.transform='',200); });
+    setTimeout(()=>say('Hoot! This is my app.'),1200);
+  </script>
+
+</body>
+</html>
