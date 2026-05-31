@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Websites and interfaces designed and built by Mohammad Dawood.">
+  <meta name="theme-color" content="#c0622b">
+  <title>Websites &amp; Design — Mohammad Dawood</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Pixelify+Sans:wght@400;500;600;700&family=Sora:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* ===========================================================
+       WEBSITES & DESIGN — pixel desktop OS
+       =========================================================== */
+    body.web-page { background: var(--cream); color: var(--text); overflow-x: hidden; min-height: 100vh; }
+
+    .web-bg { position: fixed; inset: 0; z-index: -3; overflow: hidden; pointer-events: none; }
+    .web-bg .blob { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.30; }
+    .web-bg .b1 { width: 46vw; height: 46vw; background: radial-gradient(circle, #3aa0d6, transparent 70%); top: -14%; right: -8%; animation: drift1 26s ease-in-out infinite; }
+    .web-bg .b2 { width: 44vw; height: 44vw; background: radial-gradient(circle, #c0622b, transparent 70%); bottom: -16%; left: -10%; animation: drift2 30s ease-in-out infinite; }
+    @keyframes drift1 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-6vw,6vh) scale(1.12)} }
+    @keyframes drift2 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(6vw,-6vh) scale(1.1)} }
+    .web-grid-bg { position: fixed; inset: 0; z-index: -2; pointer-events: none; opacity: 0.4;
+      background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 60px 60px; -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 80%); mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 80%); }
+
+    .back { position: fixed; top: 22px; left: 22px; z-index: 80; display: inline-flex; align-items: center; gap: 9px;
+      background: var(--card); border: 1px solid var(--card-border); color: var(--text-soft);
+      padding: 11px 20px 11px 16px; border-radius: 50px; font-family: 'Nunito', sans-serif; font-size: 0.88rem; font-weight: 800;
+      text-decoration: none; cursor: pointer; box-shadow: var(--shadow-sm); transition: transform .3s var(--ease), background .3s, color .3s, box-shadow .3s; }
+    .back:hover { transform: translateX(-4px); color: var(--orange); border-color: var(--orange); box-shadow: var(--shadow); }
+
+    .web-head { text-align: center; padding: 110px 24px 0; max-width: 760px; margin: 0 auto; }
+    .web-eyebrow { display: inline-block; font-family: 'Pixelify Sans', cursive; font-size: 0.9rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--orange); margin-bottom: 16px; padding: 6px 16px;
+      border: 1px solid var(--card-border); border-radius: 50px; background: var(--card); }
+    .web-title { font-family: 'Sora', sans-serif; font-size: clamp(2.4rem, 6vw, 4rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.03em; }
+    .web-title .grad { background: var(--grad-text); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .web-sub { margin: 20px auto 0; max-width: 580px; color: var(--text-soft); font-size: 1.1rem; line-height: 1.7; }
+    .web-hint { margin-top: 16px; font-family: 'Pixelify Sans', cursive; font-size: 0.95rem; color: var(--text-muted); }
+    .web-hint b { color: var(--orange); }
+
+    /* ===== the desktop / monitor ===== */
+    .desk-wrap { max-width: 1080px; margin: 46px auto 0; padding: 10px 16px 0; }
+    .monitor { position: relative; background: linear-gradient(160deg, #2a2014, #181109); border-radius: 22px; padding: 16px;
+      box-shadow: 0 0 0 2px var(--card-border), var(--shadow-lg); }
+    .monitor::after { content: ''; position: absolute; left: 50%; bottom: -54px; transform: translateX(-50%); width: 160px; height: 54px;
+      background: linear-gradient(180deg, #241a10, #14100b); clip-path: polygon(22% 0, 78% 0, 100% 100%, 0% 100%); z-index: -1; }
+    .monitor-base { width: 230px; height: 16px; margin: 54px auto 0; border-radius: 6px; background: #1d150c; box-shadow: 0 0 0 2px var(--card-border); }
+
+    /* screen surface = simple desktop */
+    .desktop { position: relative; height: clamp(440px, 64vh, 600px); border-radius: 12px; overflow: hidden;
+      background: linear-gradient(160deg, #1d2733 0%, #161f2a 55%, #11181f 100%);
+      box-shadow: inset 0 0 0 2px rgba(0,0,0,0.6); image-rendering: pixelated; }
+    .desktop::before { content: ''; position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 40px 40px; pointer-events: none; }
+
+    .desktop-os { position: absolute; inset: 0; display: flex; flex-direction: column; }
+
+    /* desktop icons */
+    .desk-icons { flex: 1; padding: 22px; display: flex; flex-direction: column; gap: 18px; align-items: flex-start; }
+    .desk-icon { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 84px; cursor: pointer; background: none; border: none;
+      font-family: 'Pixelify Sans', cursive; color: #fff; text-shadow: 1px 1px 0 rgba(0,0,0,0.6); transition: transform .15s steps(2); }
+    .desk-icon:hover { transform: scale(1.06); }
+    .desk-icon:focus-visible { outline: 2px dashed #fff; outline-offset: 4px; }
+    .di-tile { width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; font-size: 2.1rem;
+      background: rgba(255,255,255,0.12); box-shadow: 0 0 0 3px rgba(0,0,0,0.5), inset 0 0 0 2px rgba(255,255,255,0.18); }
+    .di-label { font-size: 0.82rem; }
+    .di-chrome { background: #fff; box-shadow: 0 0 0 3px rgba(0,0,0,0.5); }
+    .chrome-logo { width: 40px; height: 40px; image-rendering: pixelated; }
+
+    /* taskbar */
+    .taskbar { height: 46px; display: flex; align-items: center; gap: 10px; padding: 0 12px;
+      background: rgba(10,16,22,0.82); backdrop-filter: blur(6px); box-shadow: inset 0 2px 0 rgba(255,255,255,0.06); }
+    .start-btn { display: inline-flex; align-items: center; gap: 8px; font-family: 'Pixelify Sans', cursive; font-weight: 600; color: #0a0f16;
+      background: var(--tan); padding: 7px 14px; font-size: 0.85rem; box-shadow: 0 3px 0 #9c7a45; cursor: default; }
+    .task-spacer { flex: 1; }
+    .task-clock { font-family: 'Pixelify Sans', cursive; color: #dfe9f0; font-size: 0.9rem; letter-spacing: 1px; }
+    .task-chip { width: 30px; height: 30px; background: rgba(255,255,255,0.1); box-shadow: inset 0 0 0 2px rgba(255,255,255,0.14);
+      display: flex; align-items: center; justify-content: center; cursor: pointer; }
+    .task-chip img { width: 20px; height: 20px; }
+
+    /* ===== browser window ===== */
+    .browser { position: absolute; inset: 26px 26px 60px; background: var(--card); border-radius: 12px; overflow: hidden;
+      box-shadow: 0 0 0 2px rgba(0,0,0,0.5), 0 30px 60px rgba(0,0,0,0.5); display: none; flex-direction: column;
+      opacity: 0; transform: scale(0.92) translateY(10px); transition: opacity .3s var(--ease), transform .3s var(--ease-spring); }
+    .browser.open { display: flex; opacity: 1; transform: none; }
+    @media (max-width: 600px){ .browser { inset: 12px 12px 56px; } }
+
+    .br-titlebar { display: flex; align-items: center; gap: 8px; padding: 12px 16px; background: var(--surface-2); border-bottom: 1px solid var(--card-border); }
+    .br-dots { display: flex; gap: 6px; }
+    .br-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .br-dot.r{background:#ff5f57} .br-dot.y{background:#febc2e} .br-dot.g{background:#28c840}
+    .br-title { font-family: 'Pixelify Sans', cursive; font-size: 0.85rem; color: var(--text-muted); margin-left: 6px; }
+
+    /* address + bookmarks bar */
+    .br-addr { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-bottom: 1px solid var(--card-border); background: var(--card); }
+    .br-nav-btns { display: flex; gap: 6px; color: var(--text-muted); }
+    .br-nav-btns button { width: 28px; height: 28px; border-radius: 50%; border: none; background: var(--surface-2); color: var(--text-soft); cursor: pointer; font-size: 0.9rem; }
+    .br-nav-btns button:hover { color: var(--orange); }
+    .br-url { flex: 1; display: flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 50px; background: var(--surface-2);
+      font-family: 'Nunito', sans-serif; font-size: 0.85rem; color: var(--text-soft); font-weight: 600; min-width: 0; }
+    .br-url .lock { color: #2bb673; }
+    .br-url .u { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    .br-marks { display: flex; align-items: center; gap: 6px; padding: 8px 12px; background: var(--card); border-bottom: 1px solid var(--card-border); overflow-x: auto; }
+    .br-mark { display: inline-flex; align-items: center; gap: 7px; padding: 6px 12px; border-radius: 8px; cursor: pointer; white-space: nowrap;
+      font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 0.78rem; color: var(--text-soft); background: transparent; border: 1px solid transparent; transition: background .2s, color .2s, border-color .2s; }
+    .br-mark:hover { background: var(--surface-2); color: var(--text); }
+    .br-mark.active { background: color-mix(in srgb, var(--mc, var(--orange)) 16%, transparent); color: var(--text); border-color: color-mix(in srgb, var(--mc, var(--orange)) 40%, transparent); }
+    .br-mark .fav { width: 18px; height: 18px; border-radius: 5px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.78rem; }
+
+    /* viewport: the rendered website mock */
+    .br-view { flex: 1; position: relative; overflow: hidden; background: var(--surface); }
+    .site-track { display: flex; height: 100%; transition: transform .5s var(--ease); }
+    .site { flex: 0 0 100%; height: 100%; position: relative; overflow: hidden; display: flex; flex-direction: column; }
+    .site-hero { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 14px; padding: 28px;
+      background: linear-gradient(160deg, color-mix(in srgb, var(--sc) 88%, #000 4%), color-mix(in srgb, var(--sc) 50%, #000 28%)); position: relative; }
+    .site-hero::after { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.08) 1px, transparent 0); background-size: 16px 16px; }
+    .site-emoji { font-size: 3rem; position: relative; }
+    .site-name { position: relative; font-family: 'Pixelify Sans', cursive; font-weight: 700; font-size: clamp(1.6rem, 4vw, 2.4rem); color: #fff; text-shadow: 3px 3px 0 rgba(0,0,0,0.3); }
+    .site-tagline { position: relative; font-family: 'Pixelify Sans', cursive; font-size: 1.05rem; color: rgba(255,255,255,0.9); max-width: 320px; }
+    .site-fake-btns { position: relative; display: flex; gap: 10px; margin-top: 6px; }
+    .site-fake-btns span { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.78rem; padding: 8px 16px; border-radius: 50px; background: rgba(255,255,255,0.22); color: #fff; border: 1px solid rgba(255,255,255,0.25); }
+    .site-fake-btns span.solid { background: #fff; color: #1a1109; }
+    .site-strip { display: flex; gap: 8px; padding: 12px; background: rgba(0,0,0,0.18); }
+    .site-strip span { flex: 1; height: 26px; border-radius: 6px; background: rgba(255,255,255,0.14); }
+
+    /* detail card under monitor */
+    .detail { max-width: 680px; margin: 86px auto 0; padding: clamp(26px, 4vw, 40px); position: relative; overflow: hidden;
+      background: var(--card); border: 1px solid var(--card-border); border-radius: var(--radius-lg); box-shadow: var(--shadow); }
+    .detail-glow { position: absolute; top: -70px; left: 50%; transform: translateX(-50%); width: 260px; height: 260px; filter: blur(80px); opacity: 0.18; transition: background .5s; pointer-events: none; }
+    .detail-top { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; position: relative; }
+    .detail-icon { width: 58px; height: 58px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 2rem; flex: none; transition: background .4s; }
+    .detail-top h3 { font-family: 'Sora', sans-serif; font-size: 1.5rem; font-weight: 800; line-height: 1.1; }
+    .detail-role { color: var(--orange); font-weight: 800; font-size: 0.92rem; }
+    .detail p { color: var(--text-soft); line-height: 1.75; font-size: 1.02rem; margin-bottom: 20px; position: relative; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; position: relative; }
+    .tag { font-size: 0.78rem; font-weight: 700; padding: 6px 14px; border-radius: 50px; background: var(--surface-2); color: var(--text-soft); border: 1px solid var(--card-border); }
+    .detail-links { display: flex; gap: 12px; flex-wrap: wrap; position: relative; }
+    .d-btn { padding: 12px 24px; border-radius: 50px; font-weight: 800; font-size: 0.9rem; text-decoration: none; cursor: pointer;
+      background: var(--grad-warm); color: #fff; box-shadow: var(--shadow-glow); border: none; transition: transform .3s var(--ease); }
+    .d-btn.ghost-btn { background: transparent; color: var(--text-soft); border: 1.5px solid var(--card-border); box-shadow: none; }
+    .d-btn:hover { transform: translateY(-2px); }
+    .d-btn.ghost-btn:hover { border-color: var(--orange); color: var(--orange); }
+    .d-soon { display: inline-flex; align-items: center; gap: 9px; padding: 12px 22px; border-radius: 50px; font-weight: 800; font-size: 0.88rem;
+      background: var(--surface-2); border: 1px dashed var(--card-border); color: var(--text-muted); }
+    .d-soon .pdot { width: 9px; height: 9px; border-radius: 50%; background: var(--orange); animation: pdotBlink 1.4s ease-in-out infinite; }
+    @keyframes pdotBlink { 0%,100%{opacity:.3} 50%{opacity:1} }
+
+    .web-footer { text-align: center; padding: 70px 24px 80px; color: var(--text-muted); font-size: 0.9rem; }
+    .web-footer a { color: var(--orange); text-decoration: none; font-weight: 700; }
+    .web-footer a:hover { text-decoration: underline; }
+    .owl { position: fixed; bottom: 18px; right: 18px; width: 78px; height: 78px; image-rendering: pixelated; z-index: 70; cursor: pointer;
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,0.4)); animation: floaty 3s ease-in-out infinite; }
+    @keyframes floaty { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-9px)} }
+    .owl-bubble { position: fixed; bottom: 102px; right: 18px; z-index: 71; background: var(--card); color: var(--text);
+      border: 2px solid var(--tan); border-radius: 16px; font-family: 'Pixelify Sans', cursive; font-size: 0.95rem; padding: 10px 14px;
+      box-shadow: var(--shadow); opacity: 0; transform: scale(0.8) translateY(8px); transition: .3s var(--ease-spring); pointer-events: none; }
+    .owl-bubble.show { opacity: 1; transform: scale(1) translateY(0); }
+
+    @media (max-width: 600px) {
+      .web-head { padding-top: 90px; }
+      .web-sub, .web-hint { font-size: 0.95rem; }
+      .owl { width: 58px; height: 58px; }
+      .di-label { font-size: 0.72rem; }
+      .desk-wrap { padding: 10px 10px 0; }
+      .monitor { padding: 10px; border-radius: 16px; }
+      .desktop { height: 78vh; }
+      .desk-icons { padding: 14px; gap: 12px; }
+      .di-tile { width: 50px; height: 50px; font-size: 1.7rem; }
+      .chrome-logo { width: 34px; height: 34px; }
+      .browser { inset: 10px 10px 52px; border-radius: 10px; }
+      .br-titlebar { padding: 10px 12px; }
+      .br-title { display: none; }
+      .br-marks { gap: 4px; padding: 8px; }
+      .br-mark { font-size: 0.72rem; padding: 6px 9px; }
+      .br-addr { padding: 8px 10px; gap: 6px; }
+      .br-url { font-size: 0.76rem; padding: 7px 10px; }
+      .site-name { font-size: 1.5rem; }
+      .taskbar { height: 42px; }
+    }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } .site-track, .browser { transition: none; } }
+  </style>
+</head>
+<body class="web-page">
+
+  <div class="web-bg"><span class="blob b1"></span><span class="blob b2"></span></div>
+  <div class="web-grid-bg"></div>
+
+  <a href="index.html" class="back">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Back to portfolio
+  </a>
+
+  <header class="web-head">
+    <span class="web-eyebrow">Websites &amp; Design</span>
+    <h1 class="web-title">Sites I've <span class="grad">designed &amp; built</span></h1>
+    <p class="web-sub">Responsive websites and interfaces, crafted pixel by pixel. Boot up my desktop below.</p>
+    <p class="web-hint">Pick a <b>bookmark</b> to explore each site I've built.</p>
+  </header>
+
+  <section class="desk-wrap">
+    <div class="monitor">
+      <div class="desktop">
+        <div class="desktop-os">
+          <div class="desk-icons">
+            <button class="desk-icon" id="open-chrome" aria-label="Open Chrome browser">
+              <span class="di-tile di-chrome">
+                <svg class="chrome-logo" viewBox="0 0 48 48" shape-rendering="crispEdges">
+                  <circle cx="24" cy="24" r="22" fill="#fff"/>
+                  <path d="M24 2a22 22 0 0 1 19 11H24a11 11 0 0 0-9.5 5.5L7 13A22 22 0 0 1 24 2z" fill="#ea4335"/>
+                  <path d="M5 13a22 22 0 0 0-1 21l11-19a11 11 0 0 0 .5 11L5 13z" fill="#fbbc05" opacity="0"/>
+                  <path d="M2 24a22 22 0 0 0 22 22l9.5-16.5A11 11 0 0 1 13 24l-.5-.9L4 13A21.9 21.9 0 0 0 2 24z" fill="#34a853"/>
+                  <path d="M43 13H24a11 11 0 0 1 9.5 16.5L24 46a22 22 0 0 0 19-33z" fill="#4285f4"/>
+                  <circle cx="24" cy="24" r="9" fill="#fff"/>
+                  <circle cx="24" cy="24" r="6.5" fill="#4285f4"/>
+                </svg>
+              </span>
+              <span class="di-label">Chrome</span>
+            </button>
+
+            <div class="desk-icon" style="cursor:default;">
+              <span class="di-tile">📁</span>
+              <span class="di-label">Projects</span>
+            </div>
+            <div class="desk-icon" style="cursor:default;">
+              <span class="di-tile">🦉</span>
+              <span class="di-label">README</span>
+            </div>
+          </div>
+
+          <!-- browser window -->
+          <div class="browser open" id="browser">
+            <div class="br-titlebar">
+              <span class="br-dots"><span class="br-dot r"></span><span class="br-dot y"></span><span class="br-dot g"></span></span>
+              <span class="br-title">Chrome — Mohammad's Work</span>
+            </div>
+            <div class="br-addr">
+              <div class="br-nav-btns"><button id="br-prev" aria-label="Back">&#8592;</button><button id="br-next" aria-label="Forward">&#8594;</button></div>
+              <div class="br-url"><span class="lock">&#128274;</span><span class="u" id="br-url">https://</span></div>
+            </div>
+            <div class="br-marks" id="br-marks"></div>
+            <div class="br-view">
+              <div class="site-track" id="site-track"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="taskbar">
+          <span class="start-btn">🦉 Start</span>
+          <span class="task-chip" id="task-chrome" title="Chrome"><svg class="chrome-logo" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#fff"/><path d="M43 13H24a11 11 0 0 1 9.5 16.5L24 46a22 22 0 0 0 19-33z" fill="#4285f4"/><path d="M24 2a22 22 0 0 1 19 11H24a11 11 0 0 0-9.5 5.5L7 13A22 22 0 0 1 24 2z" fill="#ea4335"/><path d="M2 24a22 22 0 0 0 22 22l9.5-16.5A11 11 0 0 1 13 24z" fill="#34a853"/><circle cx="24" cy="24" r="8.5" fill="#fff"/><circle cx="24" cy="24" r="6" fill="#4285f4"/></svg></span>
+          <span class="task-spacer"></span>
+          <span class="task-clock" id="task-clock">12:00</span>
+        </div>
+      </div>
+    </div>
+    <div class="monitor-base"></div>
+
+    <div class="detail" id="detail">
+      <div class="detail-glow" id="detail-glow"></div>
+      <div class="detail-top">
+        <div class="detail-icon" id="d-icon"></div>
+        <div><h3 id="d-name"></h3><div class="detail-role" id="d-role"></div></div>
+      </div>
+      <p id="d-desc"></p>
+      <div class="tags" id="d-tags"></div>
+      <div class="detail-links" id="d-links"></div>
+    </div>
+  </section>
+
+  <footer class="web-footer">
+    <p>&copy; 2026 Mohammad Dawood &middot; <a href="index.html">Back to the portfolio</a></p>
+  </footer>
+
+  <div class="owl-bubble" id="owl-bubble"></div>
+  <img class="owl" id="owl" src="Frame 3.png" alt="Owl mascot">
+
+  <script>
+    const SITES = [
+      {
+        emoji:'🍔', name:'Super Burger', host:'superburger.app', role:'Restaurant landing page',
+        tagline:'Order. Stack. Devour.', accent:'#e8662b', status:'live',
+        desc:'A juicy marketing site for the Super Burger brand — animated hero, online menu, and a smooth order-now flow that converts.',
+        tags:['HTML','CSS','JavaScript','GSAP'],
+        links:[{label:'Visit site',href:'#'},{label:'Source',href:'#',ghost:true}]
+      },
+      {
+        emoji:'🛍️', name:'Nestria Store', host:'nestria.shop', role:'E-commerce',
+        tagline:'Shopping, beautifully simple.', accent:'#7c5cff', status:'soon',
+        desc:'A modern storefront concept with product filtering, a slick cart drawer, and a checkout designed to feel effortless.',
+        tags:['Next.js','Tailwind','Stripe']
+      },
+      {
+        emoji:'📊', name:'Pulse Dash', host:'pulse.dev', role:'SaaS dashboard',
+        tagline:'Data that speaks.', accent:'#2bb673', status:'soon',
+        desc:'An analytics dashboard UI with live charts, clean tables, and a layout that stays readable at any screen size.',
+        tags:['React','TypeScript','Chart.js']
+      },
+      {
+        emoji:'🎨', name:'Studio Folio', host:'studio.folio', role:'Portfolio',
+        tagline:'Work worth showing.', accent:'#e0529c', status:'soon',
+        desc:'A bold portfolio template for creatives — big type, smooth scroll, and a gallery that lets the work do the talking.',
+        tags:['Astro','GSAP','Sass']
+      }
+    ];
+
+    let i = 0;
+    const marksEl = document.getElementById('br-marks');
+    const trackEl = document.getElementById('site-track');
+    const urlEl = document.getElementById('br-url');
+    const browser = document.getElementById('browser');
+
+    // build viewport sites
+    trackEl.innerHTML = SITES.map(s => `
+      <div class="site" style="--sc:${s.accent}">
+        <div class="site-hero">
+          <div class="site-emoji">${s.emoji}</div>
+          <div class="site-name">${s.name}</div>
+          <div class="site-tagline">${s.tagline}</div>
+          <div class="site-fake-btns"><span class="solid">${s.status==='live'?'Visit':'Preview'}</span><span>Learn more</span></div>
+        </div>
+        <div class="site-strip"><span></span><span></span><span></span><span></span></div>
+      </div>`).join('');
+
+    // bookmarks bar = the websites
+    marksEl.innerHTML = SITES.map((s,n)=>`
+      <button class="br-mark" data-i="${n}" style="--mc:${s.accent}"><span class="fav" style="background:${s.accent}">${s.emoji}</span>${s.host}</button>`).join('');
+    const marks = [...marksEl.children];
+
+    const dIcon=document.getElementById('d-icon'), dName=document.getElementById('d-name'),
+          dRole=document.getElementById('d-role'), dDesc=document.getElementById('d-desc'),
+          dTags=document.getElementById('d-tags'), dLinks=document.getElementById('d-links'),
+          dGlow=document.getElementById('detail-glow');
+
+    function render(){
+      trackEl.style.transform = `translateX(${-i*100}%)`;
+      marks.forEach((m,n)=>m.classList.toggle('active', n===i));
+      const s = SITES[i];
+      urlEl.textContent = 'https://' + s.host;
+      dGlow.style.background = s.accent;
+      dIcon.textContent = s.emoji;
+      dIcon.style.background = `color-mix(in srgb, ${s.accent} 18%, transparent)`;
+      dName.textContent = s.name;
+      dRole.textContent = s.role;
+      dDesc.textContent = s.desc;
+      dTags.innerHTML = s.tags.map(t=>`<span class="tag">${t}</span>`).join('');
+      dLinks.innerHTML = s.status==='live'
+        ? s.links.map(l=>`<a class="d-btn ${l.ghost?'ghost-btn':''}" href="${l.href}" target="_blank" rel="noopener">${l.label}</a>`).join('')
+        : `<span class="d-soon"><span class="pdot"></span> Coming soon</span>`;
+    }
+    function go(n){ i=(n+SITES.length)%SITES.length; render(); }
+
+    marks.forEach(m=>m.addEventListener('click', ()=>go(+m.dataset.i)));
+    document.getElementById('br-next').addEventListener('click', ()=>go(i+1));
+    document.getElementById('br-prev').addEventListener('click', ()=>go(i-1));
+
+    // chrome icons re-focus the (already open) browser
+    function openBrowser(){ browser.classList.add('open'); }
+    document.getElementById('open-chrome').addEventListener('click', openBrowser);
+    document.getElementById('task-chrome').addEventListener('click', openBrowser);
+
+    addEventListener('keydown', e=>{
+      if(e.key==='ArrowRight') go(i+1);
+      if(e.key==='ArrowLeft') go(i-1);
+    });
+
+    render();
+
+    // clock
+    const clock = document.getElementById('task-clock');
+    const tick = ()=>{ const d=new Date(); clock.textContent = String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0'); };
+    tick(); setInterval(tick, 1000*30);
+
+    // owl
+    const owl=document.getElementById('owl'), bubble=document.getElementById('owl-bubble');
+    const lines=['Hoot! Browse around.','Click a bookmark!','More sites soon.','Like the desktop?','Built by Mo.'];
+    let bt;
+    function say(t){ bubble.textContent=t; bubble.classList.add('show'); clearTimeout(bt); bt=setTimeout(()=>bubble.classList.remove('show'),2400); }
+    owl.addEventListener('click', ()=>{ say(lines[Math.floor(Math.random()*lines.length)]); owl.style.transform='scale(1.18) rotate(-8deg)'; setTimeout(()=>owl.style.transform='',200); });
+    setTimeout(()=>say('Hoot! Pick a site below.'), 1100);
+  </script>
+
+</body>
+</html>
