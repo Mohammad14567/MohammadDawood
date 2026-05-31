@@ -1,174 +1,258 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Mohammad Dawood — Full Stack Developer portfolio. Building things people love to use.">
-  <title>Mohammad Dawood — Full Stack Developer 🦉</title>
+  <meta name="description" content="Mohammad Dawood - Full Stack Developer. Crafting beautiful, performant digital experiences people love to use.">
+  <meta name="theme-color" content="#c0622b">
+  <meta property="og:title" content="Mohammad Dawood - Full Stack Developer">
+  <meta property="og:description" content="Building things people love to use. Full Stack Developer portfolio.">
+  <meta property="og:type" content="website">
+  <title>Mohammad Dawood - Full Stack Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Pixelify+Sans:wght@400;500;600;700&family=Sora:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
+<!-- Preloader -->
+<div id="preloader">
+  <div class="preloader-inner">
+    <img src="Frame 3.png" alt="" class="preloader-owl">
+    <div class="preloader-bar"><span></span></div>
+    <div class="preloader-text">Loading</div>
+  </div>
+</div>
+
+<!-- Custom cursor -->
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"></div>
+
+<!-- Ambient background -->
+<div class="bg-aurora" aria-hidden="true">
+  <span class="blob blob-1"></span>
+  <span class="blob blob-2"></span>
+  <span class="blob blob-3"></span>
+</div>
+<div class="bg-grid" aria-hidden="true"></div>
+<div class="bg-noise" aria-hidden="true"></div>
+
+<!-- Scroll progress -->
 <div id="scroll-progress"></div>
 
 <!-- Nav -->
 <nav>
-  <div class="nav-logo">Mohammad Dawood</div>
+  <a href="#hero" class="nav-logo">Mohammad<span class="logo-dot">.</span></a>
   <ul class="nav-links">
-    <li><a href="#hero">Home</a></li>
-    <li><a href="#about">About</a></li>
+    <li><a href="#hero" class="active">Home</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#skills">Skills</a></li>
-    <li><a href="#experience">Experience</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+  <div class="nav-actions">
+    <a href="#contact" class="nav-cta">Let's talk</a>
+    <button id="menu-toggle" class="menu-toggle" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
 </nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#hero">Home</a>
+  <a href="#projects">Projects</a>
+  <a href="#skills">Skills</a>
+  <a href="#contact">Contact</a>
+</div>
 
 <!-- Hero -->
 <section id="hero">
-  <h1 class="hero-title">&lt; Hello, I'm <span>Mohammad</span> /&gt;</h1>
-  <p class="hero-sub">Full Stack Developer · I build things people love to use</p>
-  <div class="typewriter-wrap"><span id="typewriter"></span></div>
-  <div class="hero-btns">
-    <a href="#projects" class="btn btn-primary">🛠️ See My Work</a>
-    <a href="#contact" class="btn btn-secondary">👋 Say Hello</a>
-  </div>
-</section>
-
-<!-- About -->
-<section id="about">
-  <h2 class="section-title">About Me</h2>
-  <div class="about-grid">
-    <div>
-      <div class="about-frame">
-        <div class="frame-owl" style="font-size:3rem;"></div>
-        <img src="Frame 3.png" alt="Mo's Owl" style="width:180px;height:180px;image-rendering:pixelated;border-radius:12px;">
-      </div>
+  <div class="hero-inner">
+    <div class="hero-badge reveal"><span class="ping"></span> Available for new projects</div>
+    <h1 class="hero-title reveal">
+      <span class="line">Hi, I'm <span class="grad">Mohammad</span></span>
+      <span class="line">I build things people <span class="underline">love</span>.</span>
+    </h1>
+    <p class="hero-sub reveal">Full-Stack Developer crafting fast, elegant, and human web experiences, from pixel-perfect interfaces to resilient backends.</p>
+    <div class="typewriter-wrap reveal">
+      <span class="tw-prefix">&lt;/&gt;</span>
+      <span id="typewriter"></span>
     </div>
-    <div class="about-text">
-      <p>Hey there! I'm <strong>Mohammad Dawood</strong> — a passionate full-stack developer who loves turning ideas into beautiful, functional digital experiences. I've spent the last 3+ years crafting web applications, from pixel-perfect frontends to robust backend architectures.</p>
-      <p>When I'm not coding, you'll find me exploring new technologies, contributing to open source, or fueling my creativity with way too much coffee ☕. I believe great software should feel alive — and that's exactly what I build.</p>
+    <div class="hero-btns reveal">
+      <a href="#projects" class="btn btn-primary magnetic">See my work</a>
+      <a href="#contact" class="btn btn-secondary magnetic">Say hello</a>
+    </div>
+    <div class="hero-meta reveal">
+      <div class="meta-item"><strong>3+</strong><span>Years building</span></div>
+      <div class="meta-divider"></div>
+      <div class="meta-item"><strong>10+</strong><span>Projects shipped</span></div>
+      <div class="meta-divider"></div>
+      <div class="meta-item"><strong>&#8734;</strong><span>Cups of coffee</span></div>
     </div>
   </div>
-  <div class="stats-row">
-    <div class="stat-card"><div class="stat-icon">🦉</div><div class="stat-num">+3</div><div class="stat-label">Years Experience</div></div>
-    <div class="stat-card"><div class="stat-icon">🚀</div>    <div class="stat-num">0</div><div class="stat-label">Projects Shipped</div></div>
-    <div class="stat-card"><div class="stat-icon">☕</div><div class="stat-num">∞</div><div class="stat-label">Cups of Coffee</div></div>
-  </div>
+  <a href="#projects" class="scroll-cue" aria-label="Scroll down">
+    <span class="mouse"><span class="wheel"></span></span>
+    <span class="scroll-text">Scroll</span>
+  </a>
 </section>
 
 <!-- Projects -->
 <section id="projects">
-  <h2 class="section-title">Things I've Built 🛠️</h2>
-  <div class="projects-grid">
+  <div class="section-head">
+    <span class="eyebrow reveal">01 &mdash; Work</span>
+    <h2 class="section-title reveal">Things I've built</h2>
+    <p class="section-lead reveal">The one in focus is highlighted. Sit back and watch them cycle, or swipe to take control.</p>
+  </div>
+
+  <div class="projects-stage reveal">
+    <div class="swiper projects-swiper">
+      <div class="swiper-wrapper">
+
+        <div class="swiper-slide">
+          <article class="project-card" style="--accent:#e8662b;">
+            <div class="pc-banner"><span class="pc-num">01</span></div>
+            <div class="pc-body"></div>
+          </article>
+        </div>
+
+        <div class="swiper-slide">
+          <article class="project-card" style="--accent:#7c5cff;">
+            <div class="pc-banner"><span class="pc-num">02</span></div>
+            <div class="pc-body"></div>
+          </article>
+        </div>
+
+        <div class="swiper-slide">
+          <article class="project-card" style="--accent:#2bb673;">
+            <div class="pc-banner"><span class="pc-num">03</span></div>
+            <div class="pc-body"></div>
+          </article>
+        </div>
+
+        <div class="swiper-slide">
+          <article class="project-card" style="--accent:#e0529c;">
+            <div class="pc-banner"><span class="pc-num">04</span></div>
+            <div class="pc-body"></div>
+          </article>
+        </div>
+
+        <div class="swiper-slide">
+          <article class="project-card" style="--accent:#3aa0d6;">
+            <div class="pc-banner"><span class="pc-num">05</span></div>
+            <div class="pc-body"></div>
+          </article>
+        </div>
+
+        <div class="swiper-slide">
+          <article class="project-card" style="--accent:#d4844a;">
+            <div class="pc-banner"><span class="pc-num">06</span></div>
+            <div class="pc-body"></div>
+          </article>
+        </div>
+
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+    <button class="swiper-button-prev nav-arrow" aria-label="Previous project"></button>
+    <button class="swiper-button-next nav-arrow" aria-label="Next project"></button>
+  </div>
 </section>
 
 <!-- Skills -->
 <section id="skills">
-  <h2 class="section-title">My Toolkit 🧰</h2>
-  <div class="skills-groups">
-
-    <div class="skill-group">
-      <h3>Frontend 🎨</h3>
-      <div class="skill-cards">
-        <div class="skill-card"><span class="sk-icon">⚛️</span><div><div class="sk-name">React</div><div class="warmth-meter"><span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span></div></div></div>
-        <div class="skill-card"><span class="sk-icon">🟢</span><div><div class="sk-name">Vue.js</div><div class="warmth-meter"><span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span><span></span></div></div></div>
-        <div class="skill-card"><span class="sk-icon">📘</span><div><div class="sk-name">TypeScript</div><div class="warmth-meter"><span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span></div></div></div>
-        <div class="skill-card"><span class="sk-icon">🎨</span><div><div class="sk-name">CSS/Sass</div><div class="warmth-meter"><span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span></div></div></div>
-        <div class="skill-card"><span class="sk-icon">⚡</span><div><div class="sk-name">Next.js</div><div class="warmth-meter"><span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span><span></span></div></div></div>
-      </div>
-    </div>
-
-    <div class="skill-group">
-      <h3>Backend ⚙️</h3>
-      <div class="skill-cards">
-        <div class="skill-card"><span class="sk-icon">🟩</span><div><div class="sk-name">Node.js</div><div class="warmth-meter"><span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span></div></div></div>
-        <div class="skill-card"><span class="sk-icon">🐍</span><div><div class="sk-name">Python</div><div class="warmth-meter"><span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span><span></span></div></div></div>
-        <div class="skill-card"><span class="sk-icon">🗄️</span><div><div class="sk-name">PostgreSQL</div><div class="warmth-meter"><span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span><span></span></div></div></div>
-        <div class="skill-card"><span class="sk-icon">🍃</span><div><div class="sk-name">MongoDB</div><div class="warmth-meter"><span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span></div></div></div>
-      </div>
-    </div>
-
-    <div class="skill-group">
-      <h3>DevOps & Tools 🚀🔧</h3>
-      <div class="skill-cards">
-        <div class="skill-card"><span class="sk-icon">🐳</span><div><div class="sk-name">Docker</div><div class="warmth-meter"><span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span><span></span></div></div></div>
-        <div class="skill-card"><span class="sk-icon">☁️</span><div><div class="sk-name">AWS</div><div class="warmth-meter"><span class="filled"></span><span class="filled"></span><span class="filled"></span><span></span><span></span></div></div></div>
-        <div class="skill-card"><span class="sk-icon">🔀</span><div><div class="sk-name">Git</div><div class="warmth-meter"><span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span></div></div></div>
-        <div class="skill-card"><span class="sk-icon">🔥</span><div><div class="sk-name">Firebase</div><div class="warmth-meter"><span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span><span></span></div></div></div>
-        <div class="skill-card"><span class="sk-icon">🧪</span><div><div class="sk-name">Jest/Testing</div><div class="warmth-meter"><span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span><span></span></div></div></div>
-      </div>
-    </div>
-
+  <div class="section-head">
+    <span class="eyebrow reveal">02 &mdash; Toolkit</span>
+    <h2 class="section-title reveal">My toolkit</h2>
+    <p class="section-lead reveal">Spin the sphere to explore the tech I work with. Proficiency on the right.</p>
   </div>
-</section>
 
-<!-- Experience -->
-<section id="experience">
-  <h2 class="section-title">My Journey 🗺️</h2>
-  <div class="timeline">
-    <div class="timeline-owl">🦉</div>
-
-    <div class="tl-item">
-      <div class="tl-dot"></div>
-      <div class="tl-content">
-        <h3>Computer Science Apprenticeship Student</h3>
-        <div class="tl-company">An Najah University</div>
-        <span class="tl-date">2024 - Present</span>
-        <p>Learning About The Practical Side of Computer Science</p>
-      </div>
+  <div class="skills-layout">
+    <div class="sphere-wrap reveal">
+      <div class="sphere-glow"></div>
+      <div class="sphere-ring"></div>
+      <span class="tagcloud"></span>
+      <div class="sphere-hint">drag to spin</div>
+      <ul class="sphere-fallback" hidden></ul>
     </div>
 
-    <div class="tl-item">
-      <div class="tl-dot"></div>
-      <div class="tl-content">
-        <h3>Frontend Developer</h3>
-        <div class="tl-company">Freelancing for small businesses</div>
-        <span class="tl-date">2026 - Present</span>
-        <p>Crafting Smart Systems for small businesses.</p>
+    <div class="skill-bars reveal">
+      <div class="skill-cat">
+        <h3>Frontend</h3>
+        <div class="bar"><span class="bar-label">React</span><span class="bar-track"><span class="bar-fill" data-pct="95"></span></span><span class="bar-pct" data-pct="95">0%</span></div>
+        <div class="bar"><span class="bar-label">TypeScript</span><span class="bar-track"><span class="bar-fill" data-pct="92"></span></span><span class="bar-pct" data-pct="92">0%</span></div>
+        <div class="bar"><span class="bar-label">CSS / Sass</span><span class="bar-track"><span class="bar-fill" data-pct="95"></span></span><span class="bar-pct" data-pct="95">0%</span></div>
+        <div class="bar"><span class="bar-label">Next.js</span><span class="bar-track"><span class="bar-fill" data-pct="82"></span></span><span class="bar-pct" data-pct="82">0%</span></div>
+      </div>
+      <div class="skill-cat">
+        <h3>Backend</h3>
+        <div class="bar"><span class="bar-label">Node.js</span><span class="bar-track"><span class="bar-fill" data-pct="93"></span></span><span class="bar-pct" data-pct="93">0%</span></div>
+        <div class="bar"><span class="bar-label">Python</span><span class="bar-track"><span class="bar-fill" data-pct="80"></span></span><span class="bar-pct" data-pct="80">0%</span></div>
+        <div class="bar"><span class="bar-label">PostgreSQL</span><span class="bar-track"><span class="bar-fill" data-pct="84"></span></span><span class="bar-pct" data-pct="84">0%</span></div>
+        <div class="bar"><span class="bar-label">MongoDB</span><span class="bar-track"><span class="bar-fill" data-pct="88"></span></span><span class="bar-pct" data-pct="88">0%</span></div>
+      </div>
+      <div class="skill-cat">
+        <h3>DevOps &amp; Tools</h3>
+        <div class="bar"><span class="bar-label">Docker</span><span class="bar-track"><span class="bar-fill" data-pct="80"></span></span><span class="bar-pct" data-pct="80">0%</span></div>
+        <div class="bar"><span class="bar-label">AWS</span><span class="bar-track"><span class="bar-fill" data-pct="65"></span></span><span class="bar-pct" data-pct="65">0%</span></div>
+        <div class="bar"><span class="bar-label">Git</span><span class="bar-track"><span class="bar-fill" data-pct="95"></span></span><span class="bar-pct" data-pct="95">0%</span></div>
       </div>
     </div>
+  </div>
 
-    <div class="tl-item">
-      <div class="tl-dot"></div>
-      <div class="tl-content">
-        <h3>Junior Web Developer</h3>
-        <div class="tl-company">StartupOwl Inc.</div>
-        <span class="tl-date">2022 — 2023</span>
-        <p>Built MVP products from scratch. Learned the ropes of agile development and product thinking.</p>
-      </div>
-    </div>
-
-    <div class="tl-item">
-      <div class="tl-dot"></div>
-      <div class="tl-content">
-        <h3>CS Degree 🎓</h3>
-        <div class="tl-company">University</div>
-        <span class="tl-date">??/span>
-        <p>This one didn't happen yet!</p>
-      </div>
+  <div class="tech-marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>React</span><span>Vue</span><span>TypeScript</span><span>Node.js</span><span>Python</span><span>Next.js</span><span>PostgreSQL</span><span>MongoDB</span><span>Docker</span><span>AWS</span><span>GraphQL</span><span>Redis</span><span>Firebase</span><span>Sass</span><span>Jest</span>
+      <span>React</span><span>Vue</span><span>TypeScript</span><span>Node.js</span><span>Python</span><span>Next.js</span><span>PostgreSQL</span><span>MongoDB</span><span>Docker</span><span>AWS</span><span>GraphQL</span><span>Redis</span><span>Firebase</span><span>Sass</span><span>Jest</span>
     </div>
   </div>
 </section>
 
 <!-- Contact -->
 <section id="contact">
-  <h2 class="section-title">Let's Build Something Together 🦉</h2>
-  <div class="contact-card">
-    <p>I'm always excited to work on new projects, collaborate with creative people, and build things that make a difference.</p>
+  <div class="section-head">
+    <span class="eyebrow reveal">03 &mdash; Contact</span>
+    <h2 class="section-title reveal">Let's build something together</h2>
+  </div>
+  <div class="contact-card reveal">
+    <div class="contact-glow"></div>
+    <p>I'm always excited to work on new projects, collaborate with creative people, and build things that make a difference. Drop me a line, I usually reply within a day.</p>
     <div class="contact-links">
-      <div class="contact-link" id="copy-email">📧 mahd2006152@gmail.com
-</div>
-      <a class="contact-link" href="https://github.com" target="_blank">🐙 GitHub</a>
+      <button class="contact-link" id="copy-email" type="button">
+        <span class="cl-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+        <span class="cl-body"><span class="cl-label">Email</span><span class="cl-value">Chanthesmoker@gmail.com</span></span>
+        <span class="cl-copy">Copy</span>
+      </button>
+      <a class="contact-link" href="https://github.com/Mohammad14567/MohammadDawood" target="_blank" rel="noopener">
+        <span class="cl-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.56 9.56 0 0 1 2.5-.34c.85 0 1.71.11 2.51.34 1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 22 12c0-5.52-4.48-10-10-10z"/></svg></span>
+        <span class="cl-body"><span class="cl-label">GitHub</span><span class="cl-value">@Mohammad14567</span></span>
+        <span class="cl-copy">Visit &rarr;</span>
+      </a>
+      <a class="contact-link" href="https://www.linkedin.com/in/mohammad-dawood-22a252413/" target="_blank" rel="noopener">
+        <span class="cl-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 18.34V10.5H5.67v7.84h2.67zM7 9.34a1.55 1.55 0 1 0 0-3.1 1.55 1.55 0 0 0 0 3.1zm11.34 9V14c0-2.3-1.23-3.37-2.87-3.37-1.32 0-1.91.73-2.24 1.24v-1.06h-2.67v7.84h2.67v-4.38c0-.23.02-.46.09-.62.18-.46.6-.94 1.3-.94.92 0 1.29.7 1.29 1.73v4.21h2.67z"/></svg></span>
+        <span class="cl-body"><span class="cl-label">LinkedIn</span><span class="cl-value">Mohammad Dawood</span></span>
+        <span class="cl-copy">Visit &rarr;</span>
+      </a>
     </div>
-    <div class="available-badge">🟢 Available for freelance & full-time opportunities</div>
+    <a href="mailto:Chanthesmoker@gmail.com" class="btn btn-primary magnetic contact-main-btn">Start a conversation</a>
+    <div class="available-badge"><span class="ping"></span> Available for freelance &amp; full-time</div>
   </div>
 </section>
 
 <footer>
-  <p>Built with 🧡 and lots of ☕ by <span>Mohammad Dawood</span> · 2026</p>
-  <p style="margin-top:8px;font-size:0.8rem;opacity:0.6;">Psst... type "hoot" for a surprise 🦉</p>
+  <div class="footer-inner">
+    <a href="#hero" class="footer-logo">Mohammad Dawood</a>
+    <p class="footer-tag">Built with care and lots of coffee &middot; 2026</p>
+    <ul class="footer-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+  <p class="footer-hint">Psst... type "hoot" anywhere for a surprise</p>
 </footer>
+
+<!-- Back to top -->
+<button id="back-to-top" aria-label="Back to top">&uarr;</button>
 
 <!-- Owl Mascot -->
 <div id="owl-container">
@@ -178,6 +262,8 @@
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/TagCloud@2.5.0/dist/TagCloud.min.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
