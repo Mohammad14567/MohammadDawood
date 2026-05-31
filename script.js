@@ -1,11 +1,13 @@
-// ===== OWL MASCOT & SPEECH BUBBLES =====
+// ============================================================
+//  Mohammad Dawood - Portfolio interactions
+// ============================================================
+
 const owlMessages = {
-  hero: "Hi! I'm Mo's owl 🦉",
-  about: "Get to know the human! 🧡",
-  projects: "Ooh, good stuff in here! 👀",
-  skills: "He knows a LOT of tricks!",
-  experience: "Quite the journey! 🗺️",
-  contact: "Don't be shy, say hello!"
+  hero: "Hi! I'm Mo's owl",
+  about: "Get to know the human",
+  projects: "Swipe through the work",
+  skills: "He knows a LOT of tricks",
+  contact: "Don't be shy, say hello"
 };
 
 let currentSection = 'hero';
@@ -13,39 +15,111 @@ let lastScrollY = 0;
 let owlClicked = false;
 let bubbleTimeout = null;
 let hootBuffer = '';
+const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const canHover = window.matchMedia('(hover: hover)').matches;
 
 document.addEventListener('DOMContentLoaded', () => {
   const owlContainer = document.getElementById('owl-container');
   const owlMascot = document.getElementById('owl-mascot');
   const bubble = document.querySelector('.speech-bubble');
 
-  // Fly-in animation on load
-  owlContainer.classList.add('fly-in');
-  setTimeout(() => {
-    owlContainer.classList.remove('fly-in');
-    owlContainer.classList.add('idle');
-  }, 1000);
-
-  // Owl blink
-  setInterval(() => {
-    owlMascot.classList.add('blink');
-    setTimeout(() => owlMascot.classList.remove('blink'), 200);
-  }, 3000);
-
   function showBubble(msg) {
+    if (!bubble) return;
     bubble.textContent = msg;
     bubble.classList.add('show');
     clearTimeout(bubbleTimeout);
     bubbleTimeout = setTimeout(() => bubble.classList.remove('show'), 3000);
   }
 
-  // Click owl
+  /* ---------- Preloader ---------- */
+  const preloader = document.getElementById('preloader');
+  window.addEventListener('load', () => setTimeout(() => preloader?.classList.add('done'), 700));
+  setTimeout(() => preloader?.classList.add('done'), 2400);
+
+  /* ---------- Theme: night only ---------- */
+  document.documentElement.setAttribute('data-theme', 'dark');
+
+  /* ---------- Nav + mobile menu ---------- */
+  const nav = document.querySelector('nav');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const backToTop = document.getElementById('back-to-top');
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  menuToggle?.addEventListener('click', () => {
+    menuToggle.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  mobileMenu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    menuToggle.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  }));
+
+  /* ---------- Custom cursor ---------- */
+  const dot = document.querySelector('.cursor-dot');
+  const ring = document.querySelector('.cursor-ring');
+  if (dot && ring && canHover) {
+    let rx = 0, ry = 0, mx = 0, my = 0;
+    document.addEventListener('mousemove', (e) => {
+      mx = e.clientX; my = e.clientY;
+      dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+    });
+    const animRing = () => {
+      rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18;
+      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+      requestAnimationFrame(animRing);
+    };
+    animRing();
+    document.addEventListener('mousedown', () => ring.classList.add('click'));
+    document.addEventListener('mouseup', () => ring.classList.remove('click'));
+    const hoverables = 'a, button, .project-card, .skill-cat, .stat-card, #owl-container, .bento-card, .tagcloud';
+    document.querySelectorAll(hoverables).forEach(el => {
+      el.addEventListener('mouseenter', () => ring.classList.add('hover'));
+      el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
+    });
+  }
+
+  /* ---------- Magnetic + tilt ---------- */
+  if (!prefersReduced && canHover) {
+    document.querySelectorAll('.magnetic').forEach(el => {
+      el.addEventListener('mousemove', (e) => {
+        const r = el.getBoundingClientRect();
+        const x = e.clientX - r.left - r.width / 2;
+        const y = e.clientY - r.top - r.height / 2;
+        el.style.transform = `translate(${x * 0.25}px, ${y * 0.35}px)`;
+      });
+      el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+    });
+    document.querySelectorAll('.tilt').forEach(el => {
+      el.addEventListener('mousemove', (e) => {
+        const r = el.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width;
+        const py = (e.clientY - r.top) / r.height;
+        const rotX = (0.5 - py) * 8;
+        const rotY = (px - 0.5) * 10;
+        el.style.transform = `perspective(900px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-6px)`;
+      });
+      el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+    });
+  }
+
+  /* ---------- Owl fly-in + blink ---------- */
+  owlContainer.classList.add('fly-in');
+  setTimeout(() => {
+    owlContainer.classList.remove('fly-in');
+    owlContainer.classList.add('idle');
+  }, 1000);
+  setInterval(() => {
+    owlMascot.classList.add('blink');
+    setTimeout(() => owlMascot.classList.remove('blink'), 200);
+  }, 3000);
+
   owlContainer.addEventListener('click', () => {
     if (owlClicked) return;
     owlClicked = true;
     owlContainer.classList.remove('idle');
     owlContainer.classList.add('spin');
-    showBubble("Hoot hoot! 🎉");
+    const hoots = ["Hoot hoot!", "You found me!", "Whoo's there?", "Hire him already"];
+    showBubble(hoots[Math.floor(Math.random() * hoots.length)]);
     setTimeout(() => {
       owlContainer.classList.remove('spin');
       owlContainer.classList.add('idle');
@@ -53,83 +127,232 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 800);
   });
 
-  // Scroll: owl direction + section detection
-  window.addEventListener('scroll', () => {
-    const dir = window.scrollY > lastScrollY ? 1 : -1;
-    owlMascot.style.transform = dir > 0 ? 'scaleX(1)' : 'scaleX(-1)';
-    lastScrollY = window.scrollY;
+  /* ---------- 3D Coverflow project slider (Swiper) ---------- */
+  if (window.Swiper) {
+    new Swiper('.projects-swiper', {
+      effect: 'coverflow',
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: 'auto',
+      loop: true,
+      loopAdditionalSlides: 2,
+      speed: 900,
+      coverflowEffect: { rotate: 24, stretch: -10, depth: 220, modifier: 1, scale: 0.86, slideShadows: false },
+      keyboard: { enabled: true },
+      autoplay: { delay: 2600, disableOnInteraction: false, pauseOnMouseEnter: true },
+      pagination: { el: '.projects-swiper .swiper-pagination', clickable: true },
+      navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }
+    });
+  }
 
-    // Scroll progress
+  /* ---------- 3D skill sphere (TagCloud) ---------- */
+  const tags = ['React', 'Vue', 'TypeScript', 'Node.js', 'Python', 'Next.js', 'PostgreSQL', 'MongoDB', 'Docker', 'AWS', 'GraphQL', 'Redis', 'Firebase', 'Sass', 'Jest', 'Git', 'Express', 'REST'];
+  const sphereEl = document.querySelector('.tagcloud');
+  const fallback = document.querySelector('.sphere-fallback');
+  if (window.TagCloud && sphereEl && !prefersReduced) {
+    const radius = window.innerWidth < 600 ? 130 : 180;
+    try {
+      TagCloud('.tagcloud', tags, {
+        radius, maxSpeed: 'fast', initSpeed: 'normal', direction: 135, keep: true
+      });
+    } catch (e) {
+      sphereEl.hidden = true; renderFallback();
+    }
+  } else if (sphereEl) {
+    sphereEl.hidden = true; renderFallback();
+  }
+  function renderFallback() {
+    if (!fallback) return;
+    fallback.hidden = false;
+    fallback.innerHTML = tags.map(t => `<li>${t}</li>`).join('');
+  }
+
+  /* ---------- About bento: spotlight + tilt ---------- */
+  const bento = document.getElementById('bento');
+  if (bento) {
+    const tiltCards = bento.querySelectorAll('[data-tilt]');
+    tiltCards.forEach(card => {
+      const spot = card.querySelector('.bento-spot');
+      card.addEventListener('mousemove', (e) => {
+        const r = card.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width;
+        const py = (e.clientY - r.top) / r.height;
+        if (spot) { spot.style.setProperty('--mx', (px * 100) + '%'); spot.style.setProperty('--my', (py * 100) + '%'); }
+        if (!prefersReduced && canHover) {
+          card.style.transform = `perspective(900px) rotateX(${(0.5 - py) * 6}deg) rotateY(${(px - 0.5) * 7}deg) translateY(-4px)`;
+        }
+      });
+      card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+    });
+  }
+
+  /* ---------- Live clock ---------- */
+  const clockEl = document.getElementById('live-clock');
+  const clockMeta = document.getElementById('clock-meta');
+  if (clockEl) {
+    const pad = n => String(n).padStart(2, '0');
+    const updateClock = () => {
+      const now = new Date();
+      const h = now.getHours();
+      clockEl.innerHTML = `${pad(h)}:${pad(now.getMinutes())}<span class="clock-sec">:${pad(now.getSeconds())}</span>`;
+      if (clockMeta) {
+        const awake = h >= 8 && h < 24;
+        clockMeta.textContent = awake ? 'Usually online & building' : 'Probably asleep (or debugging)';
+      }
+    };
+    updateClock();
+    setInterval(updateClock, 1000);
+  }
+
+  /* ---------- Coffee counter ---------- */
+  const coffeeTile = document.getElementById('coffee-tile');
+  const coffeeNum = document.getElementById('coffee-num');
+  if (coffeeTile && coffeeNum) {
+    let cups = parseInt(localStorage.getItem('coffee') || '3', 10);
+    coffeeNum.textContent = cups;
+    coffeeTile.addEventListener('click', (e) => {
+      cups++;
+      coffeeNum.textContent = cups;
+      localStorage.setItem('coffee', cups);
+      const pop = document.createElement('span');
+      pop.className = 'coffee-pop';
+      pop.textContent = '\u2615';
+      const r = coffeeTile.getBoundingClientRect();
+      pop.style.left = (e.clientX - r.left) + 'px';
+      pop.style.top = (e.clientY - r.top) + 'px';
+      coffeeTile.appendChild(pop);
+      setTimeout(() => pop.remove(), 900);
+      if (cups % 5 === 0) showBubble("That's a lot of coffee!");
+    });
+  }
+
+  /* ---------- Scroll handler ---------- */
+  const onScroll = () => {
+    const y = window.scrollY;
+    const dir = y > lastScrollY ? 1 : -1;
+    if (Math.abs(y - lastScrollY) > 2) owlMascot.style.transform = dir > 0 ? 'scaleX(1)' : 'scaleX(-1)';
+    lastScrollY = y;
+
     const h = document.documentElement.scrollHeight - window.innerHeight;
-    document.getElementById('scroll-progress').style.width = (window.scrollY / h * 100) + '%';
-  });
+    document.getElementById('scroll-progress').style.width = (y / h * 100) + '%';
 
-  // Section observer for owl messages
+    nav.classList.toggle('scrolled', y > 30);
+    backToTop?.classList.toggle('show', y > 600);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  backToTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  /* ---------- Section observer ---------- */
   const sections = document.querySelectorAll('section[id]');
   const secObs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
         const id = e.target.id;
+        navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
         if (id !== currentSection) {
           currentSection = id;
           if (owlMessages[id]) showBubble(owlMessages[id]);
         }
       }
     });
-  }, { threshold: 0.3 });
+  }, { threshold: 0.4 });
   sections.forEach(s => secObs.observe(s));
 
-  // Animate elements on scroll
+  /* ---------- Reveal on scroll ---------- */
   const animObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
+    entries.forEach((e, i) => {
       if (e.isIntersecting) {
+        e.target.style.transitionDelay = (e.target.dataset.delay || (i % 4) * 70) + 'ms';
         e.target.classList.add('visible');
+        animObs.unobserve(e.target);
       }
     });
-  }, { threshold: 0.15 });
-  document.querySelectorAll('.section-title, .stat-card, .project-card, .skill-card, .tl-item').forEach(el => animObs.observe(el));
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => animObs.observe(el));
 
-  // Typewriter
-  const words = ['React Developer', 'Node.js Engineer', 'Problem Solver', 'Full Stack Dev'];
+  /* ---------- Animated stat counters ---------- */
+  document.querySelectorAll('.stat-num[data-count]').forEach(el => {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const target = parseInt(el.dataset.count, 10);
+        const suffix = el.dataset.suffix || '';
+        const start = performance.now(), dur = 1400;
+        const tick = (now) => {
+          const p = Math.min((now - start) / dur, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.round(eased * target) + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+        obs.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+    obs.observe(el);
+  });
+
+  /* ---------- Animated skill bars ---------- */
+  document.querySelectorAll('.bar').forEach(bar => {
+    const fill = bar.querySelector('.bar-fill');
+    const pctEl = bar.querySelector('.bar-pct');
+    const pct = parseInt(fill.dataset.pct, 10);
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        setTimeout(() => { fill.style.width = pct + '%'; }, 120);
+        const start = performance.now(), dur = 1200;
+        const tick = (now) => {
+          const p = Math.min((now - start) / dur, 1);
+          pctEl.textContent = Math.round((1 - Math.pow(1 - p, 3)) * pct) + '%';
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+        obs.unobserve(bar);
+      });
+    }, { threshold: 0.5 });
+    obs.observe(bar);
+  });
+
+  /* ---------- Typewriter ---------- */
+  const words = ['React Developer', 'Node.js Engineer', 'UI Craftsman', 'Problem Solver', 'Full-Stack Dev'];
   let wi = 0, ci = 0, deleting = false;
   const twEl = document.getElementById('typewriter');
   function typewrite() {
     const word = words[wi];
     if (!deleting) {
-      twEl.textContent = word.substring(0, ci + 1);
-      ci++;
-      if (ci === word.length) { deleting = true; setTimeout(typewrite, 1800); return; }
-      setTimeout(typewrite, 80);
+      twEl.textContent = word.substring(0, ci + 1); ci++;
+      if (ci === word.length) { deleting = true; setTimeout(typewrite, 1700); return; }
+      setTimeout(typewrite, 75);
     } else {
-      twEl.textContent = word.substring(0, ci - 1);
-      ci--;
+      twEl.textContent = word.substring(0, ci - 1); ci--;
       if (ci === 0) { deleting = false; wi = (wi + 1) % words.length; setTimeout(typewrite, 400); return; }
-      setTimeout(typewrite, 40);
+      setTimeout(typewrite, 38);
     }
   }
-  typewrite();
+  if (twEl) typewrite();
 
-  // Email copy
-  document.getElementById('copy-email')?.addEventListener('click', () => {
-    navigator.clipboard.writeText('mohdawood@dev.com');
-    showBubble("Copied! ✉️");
+  /* ---------- Copy email ---------- */
+  const copyEmail = document.getElementById('copy-email');
+  copyEmail?.addEventListener('click', () => {
+    navigator.clipboard?.writeText('Chanthesmoker@gmail.com').then(() => {
+      showBubble("Email copied!");
+      const tag = copyEmail.querySelector('.cl-copy');
+      if (tag) { const t = tag.textContent; tag.textContent = 'Copied!'; setTimeout(() => tag.textContent = t, 1800); }
+    }).catch(() => showBubble("Couldn't copy"));
   });
 
-  // Easter egg: type "hoot"
+  /* ---------- Easter egg ---------- */
   document.addEventListener('keydown', (e) => {
+    if (e.key.length !== 1) return;
     hootBuffer += e.key.toLowerCase();
     if (hootBuffer.length > 10) hootBuffer = hootBuffer.slice(-10);
-    if (hootBuffer.includes('hoot')) {
-      hootBuffer = '';
-      owlRain();
-    }
+    if (hootBuffer.includes('hoot')) { hootBuffer = ''; owlRain(); }
   });
-
   function owlRain() {
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 32; i++) {
       const owl = document.createElement('div');
       owl.className = 'rain-owl';
-      owl.textContent = '🦉';
+      owl.textContent = '\uD83E\uDD89';
       owl.style.left = Math.random() * 100 + 'vw';
       owl.style.animationDuration = (2 + Math.random() * 2) + 's';
       owl.style.animationDelay = (Math.random() * 1.5) + 's';
@@ -137,30 +360,52 @@ document.addEventListener('DOMContentLoaded', () => {
       document.body.appendChild(owl);
       setTimeout(() => owl.remove(), 5000);
     }
-    showBubble("HOOT HOOT HOOT! 🎉🦉");
+    showBubble("HOOT HOOT HOOT!");
   }
 
-  // Create pixel stars in hero
-  const hero = document.getElementById('hero');
-  for (let i = 0; i < 12; i++) {
-    const star = document.createElement('div');
-    star.className = 'pixel-star';
-    star.style.top = (10 + Math.random() * 80) + '%';
-    star.style.left = (5 + Math.random() * 90) + '%';
-    star.style.animationDelay = (Math.random() * 3) + 's';
-    star.style.width = (6 + Math.random() * 6) + 'px';
-    star.style.height = star.style.width;
-    hero.appendChild(star);
+  /* ---------- Confetti on CTA ---------- */
+  function confettiBurst(x, y) {
+    const colors = ['#c0622b', '#e8b87a', '#e0529c', '#2bb673', '#7c5cff', '#d4844a'];
+    for (let i = 0; i < 40; i++) {
+      const c = document.createElement('div');
+      c.className = 'confetti';
+      c.style.left = x + 'px'; c.style.top = y + 'px';
+      c.style.background = colors[Math.floor(Math.random() * colors.length)];
+      c.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+      const ang = Math.random() * Math.PI * 2;
+      const vel = 60 + Math.random() * 120;
+      c.style.setProperty('--tx', Math.cos(ang) * vel + 'px');
+      c.style.animationDuration = (1.2 + Math.random()) + 's';
+      document.body.appendChild(c);
+      setTimeout(() => c.remove(), 2400);
+    }
   }
-  // Pixel brackets
-  ['{', '}', '<', '>', '/', ';'].forEach((ch, i) => {
-    const b = document.createElement('div');
-    b.className = 'pixel-bracket';
-    b.textContent = ch;
-    b.style.top = (15 + Math.random() * 70) + '%';
-    b.style.left = (5 + Math.random() * 90) + '%';
-    b.style.animationDelay = (i * 0.5) + 's';
-    b.style.fontSize = (1.5 + Math.random() * 1.5) + 'rem';
-    hero.appendChild(b);
-  });
+  document.querySelector('.contact-main-btn')?.addEventListener('click', (e) => confettiBurst(e.clientX, e.clientY));
+
+  /* ---------- Hero pixel decorations ---------- */
+  const hero = document.getElementById('hero');
+  if (hero && !prefersReduced) {
+    for (let i = 0; i < 14; i++) {
+      const star = document.createElement('div');
+      star.className = 'pixel-star';
+      star.style.top = (8 + Math.random() * 82) + '%';
+      star.style.left = (4 + Math.random() * 92) + '%';
+      star.style.animationDelay = (Math.random() * 3) + 's';
+      star.style.width = (5 + Math.random() * 7) + 'px';
+      star.style.height = star.style.width;
+      hero.appendChild(star);
+    }
+    ['{', '}', '<', '>', '/', ';', '()', '[]'].forEach((ch, i) => {
+      const b = document.createElement('div');
+      b.className = 'pixel-bracket';
+      b.textContent = ch;
+      b.style.top = (12 + Math.random() * 74) + '%';
+      b.style.left = (4 + Math.random() * 90) + '%';
+      b.style.animationDelay = (i * 0.5) + 's';
+      b.style.fontSize = (1.3 + Math.random() * 1.6) + 'rem';
+      hero.appendChild(b);
+    });
+  }
+
+  onScroll();
 });
