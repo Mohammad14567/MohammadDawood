@@ -289,38 +289,44 @@ section { padding: clamp(70px, 11vw, 130px) clamp(20px, 5vw, 48px); max-width: 1
    PROJECTS - 3D COVERFLOW SLIDER (focus / blur)
    ============================================================ */
 .projects-stage { position: relative; padding: 20px 0 10px; }
-.projects-swiper { width: 100%; padding: 40px 10px 80px; overflow: visible; }
-.projects-swiper .swiper-slide { width: 360px; height: 440px; transition: filter 0.55s var(--ease), opacity 0.55s var(--ease); filter: blur(8px) saturate(0.7); opacity: 0; pointer-events: none; }
-.projects-swiper .swiper-slide-prev, .projects-swiper .swiper-slide-next { filter: blur(3px) saturate(0.85); opacity: 0.6; }
-.projects-swiper .swiper-slide-active { filter: blur(0) saturate(1); opacity: 1; pointer-events: auto; }
-.project-card { width: 100%; height: 100%; background: var(--card); border: 1px solid var(--card-border); border-radius: var(--radius-lg); box-shadow: var(--shadow); overflow: hidden; display: flex; flex-direction: column; position: relative; transition: box-shadow 0.6s var(--ease); }
-.swiper-slide-active .project-card { box-shadow: var(--shadow-lg); }
+.projects-swiper { width: 100%; max-width: 1100px; margin: 0 auto; padding: 40px 10px 80px; overflow: visible; }
+.projects-swiper .swiper-slide { height: 440px; transition: filter 0.55s var(--ease), opacity 0.55s var(--ease); filter: blur(5px) saturate(0.75); opacity: 0.45; }
+.projects-swiper .swiper-slide-prev, .projects-swiper .swiper-slide-next { filter: blur(3px) saturate(0.8); opacity: 0.7; }
+.projects-swiper .swiper-slide-active { filter: blur(0) saturate(1); opacity: 1; }
+.project-card { width: 100%; height: 100%; background: var(--card); border: 1px solid var(--card-border); border-radius: var(--radius-lg); box-shadow: var(--shadow); overflow: hidden; display: flex; flex-direction: column; position: relative; transition: box-shadow 0.6s var(--ease), border-color 0.4s; }
+.swiper-slide-active .project-card { box-shadow: var(--shadow-lg), 0 0 0 1px color-mix(in srgb, var(--accent) 20%, transparent); border-color: color-mix(in srgb, var(--accent) 25%, var(--card-border)); }
 .project-card::after { content: ''; position: absolute; inset: 0; border-radius: var(--radius-lg); box-shadow: inset 0 0 0 2px transparent; transition: box-shadow 0.5s; pointer-events: none; }
 .swiper-slide-active .project-card::after { box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--accent) 55%, transparent); }
-.pc-banner { height: 156px; background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 85%, #000 5%), color-mix(in srgb, var(--accent) 55%, #fff 10%)); position: relative; display: flex; align-items: flex-start; justify-content: space-between; padding: 20px 24px; overflow: hidden; }
-.pc-banner::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.25) 1px, transparent 0); background-size: 18px 18px; opacity: 0.5; }
+.pc-banner { height: 156px; background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 90%, #000 5%), color-mix(in srgb, var(--accent) 50%, #fff 15%)); position: relative; display: flex; align-items: flex-start; justify-content: space-between; padding: 20px 24px; overflow: hidden; }
+.pc-banner::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0); background-size: 18px 18px; opacity: 0.5; }
 .pc-banner::after { content: ''; position: absolute; bottom: -50%; right: -10%; width: 180px; height: 180px; border-radius: 50%; background: rgba(255,255,255,0.18); filter: blur(10px); }
-.pc-num { font-family: 'Sora', sans-serif; font-size: 3.4rem; font-weight: 800; color: rgba(255,255,255,0.85); line-height: 1; position: relative; z-index: 1; }
-.pc-tag { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: #fff; background: rgba(255,255,255,0.22); backdrop-filter: blur(4px); padding: 6px 14px; border-radius: 50px; position: relative; z-index: 1; align-self: flex-start; }
+.pc-num { font-family: 'Sora', sans-serif; font-size: 3.4rem; font-weight: 800; color: rgba(255,255,255,0.85); line-height: 1; position: relative; z-index: 1; text-shadow: 0 2px 12px rgba(0,0,0,0.15); }
+.pc-tag { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: #fff; background: rgba(255,255,255,0.2); backdrop-filter: blur(6px); padding: 5px 14px; border-radius: 50px; position: relative; z-index: 1; align-self: flex-start; border: 1px solid rgba(255,255,255,0.15); }
 .pc-glyph { position: absolute; bottom: 10px; right: 18px; font-size: 3.4rem; z-index: 1; filter: drop-shadow(0 6px 10px rgba(0,0,0,0.25)); animation: glyphFloat 4s ease-in-out infinite; }
 @keyframes glyphFloat { 0%,100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-8px) rotate(4deg); } }
-.pc-body { padding: 26px 26px 28px; display: flex; flex-direction: column; flex: 1; min-height: 200px; }
-.pc-body h3 { font-size: 1.45rem; margin-bottom: 10px; color: var(--text); font-weight: 700; }
-.pc-body p { font-size: 0.96rem; color: var(--text-soft); margin-bottom: 18px; line-height: 1.65; flex: 1; }
-.tech-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
-.tech-pill { padding: 5px 13px; border-radius: 50px; font-size: 0.78rem; font-weight: 700; background: var(--surface-2); color: var(--text-soft); border: 1px solid var(--card-border); }
-.project-links { display: flex; gap: 10px; }
-.project-links a { padding: 10px 20px; border-radius: 50px; font-size: 0.85rem; font-weight: 800; text-decoration: none; background: var(--accent); color: #fff; transition: transform 0.3s, box-shadow 0.3s; }
+.pc-body { padding: 24px 26px 26px; display: flex; flex-direction: column; flex: 1; min-height: 200px; position: relative; background: linear-gradient(180deg, var(--card) 0%, color-mix(in srgb, var(--card) 97%, var(--accent) 3%) 100%); }
+.pc-body::before { content: ''; position: absolute; top: 0; left: 26px; right: 26px; height: 2px; background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 40%, transparent), transparent 80%); border-radius: 2px; }
+.pc-body h3 { font-size: 1.4rem; margin-bottom: 8px; color: var(--text); font-weight: 700; letter-spacing: -0.01em; }
+.pc-body p { font-size: 0.92rem; color: var(--text-soft); margin-bottom: 18px; line-height: 1.65; flex: 1; }
+.tech-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tech-pill { padding: 5px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 700; background: var(--surface-2); color: var(--text-soft); border: 1px solid var(--card-border); transition: border-color 0.3s, background 0.3s, color 0.3s; }
+.tech-pill:hover { border-color: color-mix(in srgb, var(--accent) 40%, transparent); background: color-mix(in srgb, var(--accent) 8%, var(--surface-2)); color: var(--accent); }
+.project-links { display: flex; gap: 10px; margin-top: 2px; }
+.project-links a { padding: 10px 22px; border-radius: 50px; font-size: 0.82rem; font-weight: 800; text-decoration: none; background: var(--accent); color: #fff; transition: transform 0.3s var(--ease-spring), box-shadow 0.3s, background 0.3s; letter-spacing: 0.01em; }
 .project-links a.ghost { background: transparent; color: var(--text-soft); border: 1.5px solid var(--card-border); }
-.project-links a:hover { transform: translateY(-2px); box-shadow: 0 8px 20px color-mix(in srgb, var(--accent) 35%, transparent); }
-.project-links a.ghost:hover { border-color: var(--accent); color: var(--accent); box-shadow: none; }
+.project-links a:hover { transform: translateY(-3px); box-shadow: 0 10px 24px color-mix(in srgb, var(--accent) 35%, transparent); }
+.project-links a.ghost:hover { border-color: var(--accent); color: var(--accent); box-shadow: none; background: color-mix(in srgb, var(--accent) 6%, transparent); }
+
+.explore-badge { border-style: solid !important; }
+.project-soon .explore-badge { border-color: color-mix(in srgb, var(--accent) 35%, var(--card-border)) !important; }
 
 /* Coming soon cards */
-.project-soon .pc-banner { filter: saturate(0.6); }
-.soon-badge { display: inline-flex; align-items: center; gap: 9px; padding: 9px 16px; border-radius: 50px; background: var(--surface-2); border: 1px dashed var(--card-border); font-weight: 800; font-size: 0.82rem; color: var(--text-muted); margin-top: auto; }
-.soon-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); animation: soonBlink 1.4s ease-in-out infinite; }
-@keyframes soonBlink { 0%,100% { opacity: 0.3; } 50% { opacity: 1; } }
-.project-soon .pc-body p { font-style: italic; }
+.project-soon .pc-banner { filter: saturate(0.5); }
+.project-soon .pc-banner .pc-tag { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.25); }
+.soon-badge { display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px; border-radius: 50px; background: color-mix(in srgb, var(--accent) 8%, var(--surface-2)); border: 1px solid color-mix(in srgb, var(--accent) 20%, var(--card-border)); font-weight: 800; font-size: 0.8rem; color: var(--accent); margin-top: auto; letter-spacing: 0.02em; }
+.soon-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: soonBlink 1.4s ease-in-out infinite; box-shadow: 0 0 8px color-mix(in srgb, var(--accent) 50%, transparent); }
+@keyframes soonBlink { 0%,100% { opacity: 0.3; transform: scale(0.85); } 50% { opacity: 1; transform: scale(1.1); } }
+.project-soon .pc-body p { font-style: italic; color: var(--text-muted); }
 
 .projects-swiper .swiper-pagination { bottom: 16px; }
 .projects-swiper .swiper-pagination-bullet { background: var(--text-muted); opacity: 0.4; width: 8px; height: 8px; transition: width 0.3s, opacity 0.3s; }
@@ -469,6 +475,11 @@ footer { text-align: center; padding: 56px 24px 40px; border-top: 1px solid var(
 }
 
 /* Reduced motion */
+/* ============================================================
+   RESTAURANT OVERLAY
+   ============================================================ */
+#mobile-trigger { cursor: pointer; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
   .reveal { opacity: 1; transform: none; }
