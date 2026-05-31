@@ -133,15 +133,25 @@ document.addEventListener('DOMContentLoaded', () => {
       effect: 'coverflow',
       grabCursor: true,
       centeredSlides: true,
-      slidesPerView: 'auto',
+      slidesPerView: 1.6,
       loop: true,
-      loopAdditionalSlides: 2,
-      speed: 900,
-      coverflowEffect: { rotate: 24, stretch: -10, depth: 220, modifier: 1, scale: 0.86, slideShadows: false },
+      loopAdditionalSlides: 5,
+      watchSlidesProgress: true,
+      speed: 800,
+      coverflowEffect: { rotate: 28, stretch: 0, depth: 200, modifier: 1, scale: 0.82, slideShadows: false },
       keyboard: { enabled: true },
-      autoplay: { delay: 2600, disableOnInteraction: false, pauseOnMouseEnter: true },
+      autoplay: { delay: 2800, disableOnInteraction: false, pauseOnMouseEnter: true },
       pagination: { el: '.projects-swiper .swiper-pagination', clickable: true },
-      navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }
+      navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+      breakpoints: {
+        768: { slidesPerView: 2.4 }
+      },
+      on: {
+        afterInit(sw) {
+          sw.slideToLoop(0, 0, false);
+          requestAnimationFrame(() => { sw.update(); sw.slideToLoop(0, 0, false); });
+        }
+      }
     });
   }
 
@@ -406,6 +416,21 @@ document.addEventListener('DOMContentLoaded', () => {
       hero.appendChild(b);
     });
   }
+
+  /* ---------- Project card navigation ---------- */
+  const goMobile = () => { window.location.href = 'mobile-apps.html'; };
+  const goWeb = () => { window.location.href = 'websites.html'; };
+  const projectsSection = document.getElementById('projects');
+  projectsSection?.addEventListener('click', (e) => {
+    if (e.target.closest('.js-mobile-card')) goMobile();
+    else if (e.target.closest('.js-web-card')) goWeb();
+  });
+  projectsSection?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      if (e.target.closest('.js-mobile-card')) { e.preventDefault(); goMobile(); }
+      else if (e.target.closest('.js-web-card')) { e.preventDefault(); goWeb(); }
+    }
+  });
 
   onScroll();
 });
